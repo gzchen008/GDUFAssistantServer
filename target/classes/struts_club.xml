@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="club" extends="struts-default,json-default"
+		namespace="/club">
+
+		<global-results>
+			<result name="show">/WEB-INF/jsps/show.jsp</result>
+			<result name="error">/WEB-INF/jsps/error.jsp</result>
+		</global-results>
+
+		<action name="autoCodeAction" class="com.vanroid.gduf.controller.club.AutoCodeAction"
+			method="execute">
+		</action>
+
+		<action name="admin_*" class="adminAction" method="{1}">
+			<result name="input">
+				/index.jsp
+			</result>
+			<result name="loginFail">/WEB-INF/jsps/admin/login.jsp</result>
+			<result name="exit">/WEB-INF/jsps/admin/login.jsp</result>
+			<result name="loginIn">/WEB-INF/jsps/background/index.jsp</result>
+			<result name="pwdPage">/WEB-INF/jsps/admin/admin_findpwd.jsp</result>
+			<result name="reset">/WEB-INF/jsps/admin/admin_resetPwd.jsp</result>
+			<result name="success" type="json">
+				<param name="root">list</param>
+			</result>
+		</action>
+
+
+
+		<action name="club_*" class="clubAction" method="{1}">
+			<result name="success" type="json">
+				<param name="root">list</param>
+			</result>
+			<result name="registerPage">/WEB-INF/jsps/club/club_register.jsp</result>
+			<result name="activate">/WEB-INF/jsps/club/club_activate.jsp</result>
+		</action>
+
+
+
+		<action name="clubMessage_*" class="clubMessageAction" method="{1}">
+			<result name="msg_list_android" type="json">
+				<param name="root">list</param>
+			</result>
+			<result name="android">/WEB-INF/jsps/background/club_message_android.jsp
+			</result>
+			<result name="insertPage">/WEB-INF/jsps/background/club_message_insert.jsp
+			</result>
+			<result name="success" type="redirectAction">clubMessage_updateList.action
+			</result>
+			<result name="updateList">/WEB-INF/jsps/background/club_management.jsp
+			</result>
+			<result name="update">/WEB-INF/jsps/background/club_message_update.jsp
+			</result>
+			<result name="check">/WEB-INF/jsps/background/club_message_check.jsp
+			</result>
+			<result name="showMsg">/WEB-INF/jsps/background/club_message_show.jsp
+			</result>
+			<result name="test">/test.jsp</result>
+		</action>
+
+
+
+	</package>
+</struts>

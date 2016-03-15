@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="errorJson" extends="json-default" namespace="/errorJson">
+		<action name="noLoginJSON" class="ErrorPermissionAction" method="noLoginJSON">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<!-- 未绑定帐户处理 -->
+		<action name="noBondJson" class="ErrorPermissionAction" method="noBondJson">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<action name="validateErrorExceptionJson" class="ValidateErrorExceptionAction" method="validateErrorExceptionJson">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+	</package>
+</struts>

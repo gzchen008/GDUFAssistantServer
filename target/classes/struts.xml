@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.action.extension" value=",action,do,htm" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.objectFactory" value="spring"></constant>
+
+	<!-- 系统默认包，其它子程序继承自此包 -->
+	<package name="default" extends="json-default" namespace="/">
+		<interceptors>
+			<interceptor name="userInterceptor" class="com.vanroid.gduf.interceptor.UserInterceptor">
+				<param name="excludeMethods">login,register,search,bindUser</param>
+			</interceptor>
+
+			<interceptor-stack name="gdufDefalutStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="userInterceptor" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="gdufDefalutStack" />
+		<global-results>
+			<result name="noLogin" type="chain">
+				<param name="actionName">noLoginJSON</param>
+				<param name="namespace">/errorJson</param>
+			</result>
+			<result name="validateErrorException" type="chain">
+				<param name="actionName">validateErrorExceptionJson</param>
+				<param name="namespace">/errorJson</param>
+			</result>
+			<result name="noBond" type="chain">
+				<param name="actionName">noBondJson</param>
+				<param name="namespace">/errorJson</param>
+			</result>
+
+		</global-results>
+		<!-- 全局异常处理 -->
+		<global-exception-mappings>
+			<exception-mapping result="validateErrorException" exception="com.vanroid.gduf.exception.ValidateErrorException"></exception-mapping>
+		</global-exception-mappings>
+
+		<action name="index" class="IndexAction">
+			<result type="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+	</package>
+
+
+	<include file="struts_user.xml" />
+	<include file="struts_mail.xml" />
+	<include file="struts_jwc.xml" />
+	<include file="struts_library.xml" />
+	<include file="struts_club.xml" />
+	<include file="errorJson.xml" />
+</struts>

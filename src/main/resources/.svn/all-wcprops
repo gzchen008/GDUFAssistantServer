@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/vanroid.GdufXYT/!svn/ver/44/gduf.web%20Maven%20Webapp/src/main/resources
+END
+struts_user.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/resources/struts_user.xml
+END
+struts_jwc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/resources/struts_jwc.xml
+END
+jdbc.properties
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/vanroid.GdufXYT/!svn/ver/8/gduf.web%20Maven%20Webapp/src/main/resources/jdbc.properties
+END
+log4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/resources/log4j.properties
+END
+applicationContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/resources/applicationContext.xml
+END
+struts_library.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/resources/struts_library.xml
+END
+errorJson.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/resources/errorJson.xml
+END
+spring_user_beans.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/vanroid.GdufXYT/!svn/ver/44/gduf.web%20Maven%20Webapp/src/main/resources/spring_user_beans.xml
+END
+struts.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/resources/struts.xml
+END
+struts_mail.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/resources/struts_mail.xml
+END
+applicationContext_jwc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/resources/applicationContext_jwc.xml
+END

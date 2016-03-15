@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="mail" extends="default" namespace="/mail">
+		<!-- 配置Action -->
+		<action name="mailList" class="MailAction" method="getPageMails">
+			<result type="json">
+				<param name="root">mailList</param>
+			</result>
+		</action>
+
+		<!-- 读邮件Action -->
+		<action name="readMail" class="ReadMailAction" method="readMail">
+			<result type="json">
+				<param name="root">mail</param>
+			</result>
+		</action>
+	</package>
+</struts>

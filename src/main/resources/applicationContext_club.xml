@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- ********************Dao********************** -->
+
+
+	<bean id="adminDao" class="com.vanroid.gduf.dao.club.impl.AdminDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="clubDao" class="com.vanroid.gduf.dao.club.impl.ClubDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="clubMessageDao" class="com.vanroid.gduf.dao.club.impl.ClubMessageDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<!-- *******************Service********************* -->
+	<bean id="adminService" class="com.vanroid.gduf.service.club.impl.AdminServiceImpl">
+		<property name="adminDao" ref="adminDao" />
+	</bean>
+
+	<bean id="clubService" class="com.vanroid.gduf.service.club.impl.ClubServiceImpl">
+		<property name="clubDao" ref="clubDao" />
+		<property name="adminDao" ref="adminDao" />
+	</bean>
+
+	<bean id="clubMessageService" class="com.vanroid.gduf.service.club.impl.ClubMessageServiceImp">
+		<property name="clubMessageDao" ref="clubMessageDao" />
+		<property name="clubDao" ref="clubDao" />
+	</bean>
+
+
+
+
+
+	<!-- ********************Action******************** -->
+
+
+	<bean id="adminAction" class="com.vanroid.gduf.controller.admin.AdminAction"
+		scope="prototype">
+		<property name="adminService" ref="adminService" />
+	</bean>
+
+	<bean id="clubAction" class="com.vanroid.gduf.controller.club.ClubAction"
+		scope="prototype">
+		<property name="clubService" ref="clubService" />
+	</bean>
+
+	<bean id="clubMessageAction" class="com.vanroid.gduf.controller.club.ClubMessageAction"
+		scope="prototype">
+		<property name="clubMessageService" ref="clubMessageService" />
+	</bean>
+</beans>

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/java/com/vanroid/gduf/service/impl/jwc
+END
+GradeServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/java/com/vanroid/gduf/service/impl/jwc/GradeServiceImpl.java
+END
+CourseServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/java/com/vanroid/gduf/service/impl/jwc/CourseServiceImpl.java
+END
+GradeHtmlHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/vanroid.GdufXYT/!svn/ver/36/gduf.web%20Maven%20Webapp/src/main/java/com/vanroid/gduf/service/impl/jwc/GradeHtmlHandler.java
+END
+UserInfoHtml.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/java/com/vanroid/gduf/service/impl/jwc/UserInfoHtml.java
+END
+JWCHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/java/com/vanroid/gduf/service/impl/jwc/JWCHandler.java
+END
+SuperHtmlHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/vanroid.GdufXYT/!svn/ver/36/gduf.web%20Maven%20Webapp/src/main/java/com/vanroid/gduf/service/impl/jwc/SuperHtmlHandler.java
+END
+CourseHtmlHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/java/com/vanroid/gduf/service/impl/jwc/CourseHtmlHandler.java
+END
+JwcLoginService.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/vanroid.GdufXYT/!svn/ver/53/gduf.web%20Maven%20Webapp/src/main/java/com/vanroid/gduf/service/impl/jwc/JwcLoginService.java
+END

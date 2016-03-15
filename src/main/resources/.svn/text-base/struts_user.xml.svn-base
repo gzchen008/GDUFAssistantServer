@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="user" extends="default" namespace="/user">
+		<!-- <default-interceptor-ref name="defaultInterceptorStack"></default-interceptor-ref> -->
+		<!-- 登录Action -->
+		<action name="login" class="UserAction" method="login">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<!-- 注册Action -->
+		<action name="register" class="UserAction" method="register">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<!-- 用户信息action -->
+		<action name="userInfo" class="UserAction" method="userInfo">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<action name="logout" class="UserAction" method="logout">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<!-- 绑定action -->
+		<action name="bindUser" class="BindUserAction" method="bindUser">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+	</package>
+</struts>

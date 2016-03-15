@@ -1,0 +1,31 @@
+.MessageDtail h1 {
+	text-align: center;
+	display: block;
+	font-size: 2em;
+	-webkit-margin-before: 0.67em;
+	-webkit-margin-after: 0.67em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	font-weight: bold;
+	display: block;
+}
+
+.time-source {
+	font-size: 14px;
+	padding-right: 60px;
+	display: block;
+	text-align: right;
+	color: #333;
+	display: block;
+}
+
+p {
+	font-size: 14px;
+	text-indent: 2em;
+	margin: 26px 0;
+	display: block;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+}
