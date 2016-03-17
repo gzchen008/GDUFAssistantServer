@@ -4,4 +4,6 @@ target/
 *.war
 *.ear
 .settings/
+bin/**
+.project
 
