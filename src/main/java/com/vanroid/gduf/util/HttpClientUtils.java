@@ -26,8 +26,6 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import com.sun.xml.internal.rngom.parse.host.Base;
-
 /**
  * 
  * @ClassName HttpClientUtils.java Create on 2015-8-28
