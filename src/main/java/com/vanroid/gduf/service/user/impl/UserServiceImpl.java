@@ -71,23 +71,23 @@ public class UserServiceImpl implements UserService {
 			resultMap.put("msg", "两次密码不一致");
 			return resultMap;
 		}
-		logger.debug("register:" + user.getTelphone());
 		try {
-			// 加密密码
-			user.setPassword(MD5Util.MD5(user.getPassword()));
 			// 验证电话号码是否被使用
 			int count = userDao.countByPhone(user.getTelphone());
 			if (count != 0) {
 				resultMap.put("resultCode", 2);
 				resultMap.put("msg", "该手机号已被使用，请联系管理员");
 			} else {
+				// 加密密码
+				user.setPassword(MD5Util.MD5(user.getPassword()));
 				user.setRegistDate(new Date());
 				// 添加用户
-				int userId = userDao.add(user);
-				user.setId(userId);
+				Integer userId = userDao.add(user);
+				if(userId == null)
+					throw new Exception("注册失败");
 				resultMap.put("resultCode", 3);
 				resultMap.put("msg", "注册成功！");
-				// 存入session
+				logger.debug("register:" + user.getTelphone());
 			}
 		} catch (Exception e) {
 			resultMap.put("resultCode", 4);

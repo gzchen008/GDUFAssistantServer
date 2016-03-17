@@ -33,8 +33,7 @@ import com.vanroid.gduf.service.user.UserService;
 @Controller("UserAction")
 @Scope("prototype")
 public class UserAction extends ActionSupport implements ModelDriven<User> {
-	private static final Logger logger = LoggerFactory
-			.getLogger(UserAction.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserAction.class);
 	/**
 	 * 接收用户表单
 	 */
@@ -59,8 +58,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 			User loginedUser = userService.loginCheck(user); // 检查是否登录成功
 			if (loginedUser != null) { // 登录成功
 				// 把用户存在session中
-				ActionContext.getContext().getSession()
-						.put("qtUser", loginedUser);
+				ActionContext.getContext().getSession().put("qtUser", loginedUser);
 				resultMap.put("resultCode", 1);
 				resultMap.put("msg", "登录成功");
 				logger.debug(user.getTelphone() + "已登录");
@@ -82,29 +80,32 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 	 * 注册方法
 	 */
 	public String register() {
-
 		resultMap = userService.registerByPhone(user);
 		// 登录，存入session
-		ActionContext.getContext().getSession().put("qtUser", user);
+		if (resultMap.get("resultCode").equals(3))
+			ActionContext.getContext().getSession().put("qtUser", user);
 		return "success";
 	}
 
-	public String logout(){
+	public String logout() {
 		ServletActionContext.getRequest().getSession().invalidate();
 		resultMap.put("resultCode", 1);
 		resultMap.put("msg", "退出成功");
 		return "success";
 	}
+
 	/**
 	 * 显示用户信息
+	 * 
 	 * @return
 	 */
-	public String userInfo(){
+	public String userInfo() {
 		resultMap.put("resultMap", "1");
 		User userInfo = (User) ActionContext.getContext().getSession().get("qtUser");
 		resultMap.put("userInfo", userInfo);
 		return "success";
 	}
+
 	public UserService getUserService() {
 		return userService;
 	}

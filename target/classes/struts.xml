@@ -5,8 +5,9 @@
 
 <struts>
 	<constant name="struts.action.extension" value=",action,do,htm" />
-	<constant name="struts.devMode" value="false" />
+	<constant name="struts.devMode" value="true" />
 	<constant name="struts.objectFactory" value="spring"></constant>
+	<constant name="struts.convention.package.locators" value="controller"/>
 
 	<!-- 系统默认包，其它子程序继承自此包 -->
 	<package name="default" extends="json-default" namespace="/">

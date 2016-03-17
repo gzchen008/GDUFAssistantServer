@@ -5,8 +5,12 @@
 
 <struts>
 	<package name="mail" extends="default" namespace="/mail">
+	<interceptors>
+		<interceptor name="mailInterceptor" class="com.vanroid.gduf.interceptor.MailInterceptor"></interceptor>
+	</interceptors>
 		<!-- 配置Action -->
 		<action name="mailList" class="MailAction" method="getPageMails">
+			<interceptor-ref name="mailInterceptor"></interceptor-ref>
 			<result type="json">
 				<param name="root">mailList</param>
 			</result>
@@ -14,6 +18,7 @@
 
 		<!-- 读邮件Action -->
 		<action name="readMail" class="ReadMailAction" method="readMail">
+			<interceptor-ref name="mailInterceptor"></interceptor-ref>
 			<result type="json">
 				<param name="root">mail</param>
 			</result>

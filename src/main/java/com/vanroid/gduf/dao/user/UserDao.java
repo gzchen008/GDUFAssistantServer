@@ -11,7 +11,7 @@ public interface UserDao {
 	 * @param user
 	 * @return
 	 */
-	public int add(User user);
+	public Integer add(User user);
 
 	/**
 	 * 查看同一电话号码的数量

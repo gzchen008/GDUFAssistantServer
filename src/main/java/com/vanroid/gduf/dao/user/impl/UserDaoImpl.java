@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
 
 	private HibernateTemplate hiberanteTemplate;
 
-	public int add(User user) {
+	public Integer add(User user) {
 		return (Integer) hiberanteTemplate.save(user);
 	}
 

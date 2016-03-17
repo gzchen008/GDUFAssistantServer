@@ -13,5 +13,9 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<context:annotation-config />  
 	<!-- 扫描所有spring注解的类 -->
-	 <context:component-scan base-package="com.vanroid.gduf" /> 
+	 <context:component-scan base-package="com.vanroid.gduf.entity" /> 
+	 <context:component-scan base-package="com.vanroid.gduf.dao" /> 
+	 <context:component-scan base-package="com.vanroid.gduf.service" /> 
+	 <context:component-scan base-package="com.vanroid.gduf.controller" /> 
+	 
 </beans>

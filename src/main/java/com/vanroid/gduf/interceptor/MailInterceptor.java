@@ -12,18 +12,19 @@ import com.vanroid.gduf.entity.User;
  * 
  * @author CGZ vsjosonadmin@163.com
  * 
- * @Description: 用户拦截器
+ * @Description: 邮件拦截器
  * 
  * @version 1.0
  */
-public class UserInterceptor extends MethodFilterInterceptor {
+public class MailInterceptor extends MethodFilterInterceptor {
 
 	@Override
 	protected String doIntercept(ActionInvocation inv) throws Exception {
 		// 拦截登录
-		User qtUser = (User) inv.getInvocationContext().getSession().get("qtUser");
-		if (qtUser == null) {
-			return "noLogin";
+		User qtUser = (User) inv.getInvocationContext().getSession()
+				.get("qtUser");
+		if(qtUser.getXnMailPass() == null){
+			return "noBond";
 		}
 		return inv.invoke();
 	}
