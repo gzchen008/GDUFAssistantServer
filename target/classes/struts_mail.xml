@@ -10,6 +10,7 @@
 	</interceptors>
 		<!-- 配置Action -->
 		<action name="mailList" class="MailAction" method="getPageMails">
+			<interceptor-ref name="gdufDefalutStack"></interceptor-ref>
 			<interceptor-ref name="mailInterceptor"></interceptor-ref>
 			<result type="json">
 				<param name="root">mailList</param>
@@ -18,6 +19,7 @@
 
 		<!-- 读邮件Action -->
 		<action name="readMail" class="ReadMailAction" method="readMail">
+			<interceptor-ref name="gdufDefalutStack"></interceptor-ref>
 			<interceptor-ref name="mailInterceptor"></interceptor-ref>
 			<result type="json">
 				<param name="root">mail</param>

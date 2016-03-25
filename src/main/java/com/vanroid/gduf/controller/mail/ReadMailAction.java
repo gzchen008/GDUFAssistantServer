@@ -51,8 +51,9 @@ public class ReadMailAction extends ActionSupport {
 	/**
 	 * 读邮件方法
 	 * @return
+	 * @throws Exception 
 	 */
-	public String readMail(){
+	public String readMail() throws Exception{
 		User user = (User) session.getAttribute("qtUser");
 		mailService.login(httpClient,user.getStuId(), user.getXnMailPass());
 		mail = mailService.getMail(httpClient,id);

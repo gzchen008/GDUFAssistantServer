@@ -39,5 +39,5 @@ public interface MailService {
 	 * @param xnMailPass
 	 * @return  true 成功，false 失败
 	 */
-	public boolean login(HttpClient httpClient,String stuId, String xnMailPass);
+	public boolean login(HttpClient httpClient,String stuId, String xnMailPass) throws Exception;
 }

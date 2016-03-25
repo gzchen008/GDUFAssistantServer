@@ -59,7 +59,7 @@ public class BindUserAction extends ActionSupport implements ServletRequestAware
 	 */
 	private User userForm;
 
-	public String bindUser() {
+	public String bindUser() throws Exception {
 		// 用户登录信息
 		User qtUser = (User) ActionContext.getContext().getSession().get("qtUser");
 		if (qtUser == null) {

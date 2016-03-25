@@ -5,18 +5,26 @@
 
 <struts>
 	<package name="errorJson" extends="json-default" namespace="/errorJson">
-		<action name="noLoginJSON" class="ErrorPermissionAction" method="noLoginJSON">
+		<!-- 未登录action -->
+		<action name="noLoginJSON" class="ErrorAction" method="noLoginJSON">
 			<result type="json">
 				<param name="root">resultMap</param>
 			</result>
 		</action>
-		<!-- 未绑定帐户处理 -->
-		<action name="noBondJson" class="ErrorPermissionAction" method="noBondJson">
+		<!-- 未绑定帐户action -->
+		<action name="noBondJson" class="ErrorAction" method="noBondJson">
 			<result type="json">
 				<param name="root">resultMap</param>
 			</result>
 		</action>
-		<action name="validateErrorExceptionJson" class="ValidateErrorExceptionAction" method="validateErrorExceptionJson">
+		<!-- 验证错误action -->
+		<action name="validateErrorExceptionJson" class="ErrorAction" method="validateErrorExceptionJson">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<!-- 系统无法访问错误action -->
+		<action name="validateErrorExceptionJson" class="ErrorAction" method="accessErrorJson">
 			<result type="json">
 				<param name="root">resultMap</param>
 			</result>

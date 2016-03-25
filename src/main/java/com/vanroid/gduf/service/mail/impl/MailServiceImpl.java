@@ -64,6 +64,8 @@ public class MailServiceImpl implements MailService {
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) { // 有HTTP响应
 				// 读取返回的数据
 				result = EntityUtils.toString(httpResponse.getEntity());
+			}else {
+				throw new Exception("学校系统连接错误");
 			}
 			if (result.contains("密码不正确") || result.contains("用户名不正确")) {
 				return false;

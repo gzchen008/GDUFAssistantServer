@@ -7,7 +7,7 @@
 	<constant name="struts.action.extension" value=",action,do,htm" />
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.objectFactory" value="spring"></constant>
-	<constant name="struts.convention.package.locators" value="controller"/>
+	<constant name="struts.convention.package.locators" value="controller" />
 
 	<!-- 系统默认包，其它子程序继承自此包 -->
 	<package name="default" extends="json-default" namespace="/">
@@ -22,26 +22,32 @@
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="gdufDefalutStack" />
+		<!-- 全局结果处理 -->
 		<global-results>
-			<result name="noLogin" type="chain">
+			<!-- 未登录 -->
+			<result name="error-noLogin" type="chain">
 				<param name="actionName">noLoginJSON</param>
 				<param name="namespace">/errorJson</param>
+				<param name=""></param>
 			</result>
-			<result name="validateErrorException" type="chain">
-				<param name="actionName">validateErrorExceptionJson</param>
-				<param name="namespace">/errorJson</param>
-			</result>
-			<result name="noBond" type="chain">
+			<!-- 未绑定 -->
+			<result name="error-noBond" type="chain">
 				<param name="actionName">noBondJson</param>
 				<param name="namespace">/errorJson</param>
 			</result>
-
+			<!-- 密码错误 -->
+			<result name="error-validate" type="chain">
+				<param name="actionName">validateErrorExceptionJson</param>
+				<param name="namespace">/errorJson</param>
+			</result>
 		</global-results>
-		<!-- 全局异常处理 -->
+
+		<!-- 全局异常处理 
 		<global-exception-mappings>
 			<exception-mapping result="validateErrorException" exception="com.vanroid.gduf.exception.ValidateErrorException"></exception-mapping>
 		</global-exception-mappings>
-
+		-->
+		
 		<action name="index" class="IndexAction">
 			<result type="json">
 				<param name="root">result</param>
@@ -55,5 +61,5 @@
 	<include file="struts_jwc.xml" />
 	<include file="struts_library.xml" />
 	<include file="struts_club.xml" />
-	<include file="errorJson.xml" />
+	<include file="struts_error.xml" />
 </struts>

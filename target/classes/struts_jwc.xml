@@ -4,8 +4,6 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-
-
 	<package name="jwc" extends="default" namespace="/jwc">
 		<!-- 获取课程表的action -->
 		<action name="getCourse" class="jwcAction" method="getCourse">

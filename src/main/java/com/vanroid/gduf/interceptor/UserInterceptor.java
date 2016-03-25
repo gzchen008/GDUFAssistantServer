@@ -1,5 +1,7 @@
 package com.vanroid.gduf.interceptor;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 import com.vanroid.gduf.entity.User;
@@ -20,10 +22,11 @@ public class UserInterceptor extends MethodFilterInterceptor {
 
 	@Override
 	protected String doIntercept(ActionInvocation inv) throws Exception {
+		ServletActionContext.getRequest().getSession();
 		// 拦截登录
 		User qtUser = (User) inv.getInvocationContext().getSession().get("qtUser");
 		if (qtUser == null) {
-			return "noLogin";
+			return "error-noLogin";
 		}
 		return inv.invoke();
 	}

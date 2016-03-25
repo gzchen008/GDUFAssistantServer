@@ -43,8 +43,9 @@ public class MailAction extends ActionSupport {
 
 	/**
 	 * 查找某页的邮件
+	 * @throws Exception 
 	 */
-	public String getPageMails() {
+	public String getPageMails() throws Exception {
 		// 获取页码
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String page = request.getParameter("page");
