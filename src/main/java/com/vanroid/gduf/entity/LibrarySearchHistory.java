@@ -1,6 +1,6 @@
 package com.vanroid.gduf.entity;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -40,7 +40,7 @@ public class LibrarySearchHistory {
 	 * 
 	 * 对应的查询到的书
 	 */
-	private Set<BookInfo> books;
+	private List<BookInfo> books;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -52,10 +52,10 @@ public class LibrarySearchHistory {
 	}
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name="hid",nullable=false)
-	public Set<BookInfo> getBooks() {
+	public List<BookInfo> getBooks() {
 		return books;
 	}
-	public void setBooks(Set<BookInfo> books) {
+	public void setBooks(List<BookInfo> books) {
 		this.books = books;
 	}
 	public String getKeywords() {

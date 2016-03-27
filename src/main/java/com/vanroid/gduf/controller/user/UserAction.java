@@ -59,6 +59,8 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 			if (loginedUser != null) { // 登录成功
 				// 把用户存在session中
 				ActionContext.getContext().getSession().put("qtUser", loginedUser);
+				loginedUser.setAccessTimes(loginedUser.getAccessTimes() + 1);
+				userService.update(loginedUser);
 				resultMap.put("resultCode", 1);
 				resultMap.put("msg", "登录成功");
 				logger.debug(user.getTelphone() + "已登录");

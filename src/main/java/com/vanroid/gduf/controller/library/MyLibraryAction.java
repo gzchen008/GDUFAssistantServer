@@ -1,14 +1,10 @@
 package com.vanroid.gduf.controller.library;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.client.HttpClient;
@@ -64,6 +60,10 @@ public class MyLibraryAction extends ActionSupport {
 	 * HttpClient
 	 */
 	private HttpClient httpClient;
+	/**
+	 * 图书馆用户信息
+	 */
+	private LibraryUserInfo libraryUserInfo;
 
 	public MyLibraryAction() {
 		session = ServletActionContext.getRequest().getSession();
@@ -80,8 +80,7 @@ public class MyLibraryAction extends ActionSupport {
 		Map session = ActionContext.getContext().getSession();
 		// 获取登录用户
 		User user = (User) session.get("qtUser");
-		LibraryUserInfo libraryUserInfo = myLibraryService.login(httpClient,
-				user.getStuId(), user.getLibaryPass());
+		LibraryUserInfo libraryUserInfo = myLibraryService.login(httpClient, user.getStuId(), user.getLibaryPass());
 		if (libraryUserInfo == null) {
 			throw new ValidateErrorException("图书馆密码不正确！");
 		}
@@ -100,8 +99,7 @@ public class MyLibraryAction extends ActionSupport {
 		// 获取登录用户
 		User user = (User) session.get("qtUser");
 		// 登录
-		myLibraryService.login(httpClient, user.getStuId(),
-				user.getLibaryPass());
+		myLibraryService.login(httpClient, user.getStuId(), user.getLibaryPass());
 		bookBrrowedList = myLibraryService.findBookBorrowed(httpClient);
 		return Action.SUCCESS;
 	}
@@ -115,12 +113,20 @@ public class MyLibraryAction extends ActionSupport {
 		// 获取登录用户
 		User user = (User) session.get("qtUser");
 		// 登录
-		myLibraryService.login(httpClient, user.getStuId(),
-				user.getLibaryPass());
+		myLibraryService.login(httpClient, user.getStuId(), user.getLibaryPass());
 		if (page == null)
 			page = "1";
-		bookBrrowedList = myLibraryService.findBookborrowedhistory(httpClient,
-				page);
+		bookBrrowedList = myLibraryService.findBookborrowedhistory(httpClient, page);
+		return Action.SUCCESS;
+	}
+
+	/**
+	 * 获取已登录图书馆信息
+	 * 
+	 * @return
+	 */
+	public String loadLibraryUserInfo() {
+		libraryUserInfo = (LibraryUserInfo) session.getAttribute("libraryUserInfo");
 		return Action.SUCCESS;
 	}
 
@@ -129,20 +135,22 @@ public class MyLibraryAction extends ActionSupport {
 	 */
 	@Deprecated
 	public String loginWithVeriCode() {
-		/*
-		 * // Session Map session = ActionContext.getContext().getSession(); //
-		 * 取出HttpClient HttpClient httpClient = (HttpClient)
-		 * session.get("userHttpClient"); myLibraryService = new
-		 * MyLibraryService(httpClient); // 获取登录用户 UserInfo user = (UserInfo)
-		 * session.get("user"); if (user == null) { // 未登录
-		 * resultMap.put("resultCode", "0"); resultMap.put("msg",
-		 * "必须先登录，才能访问我的图书馆"); return Action.SUCCESS; } if (veriCode == null)
-		 * {// 未输入验证码 // 输出错误提示 resultMap.put("resultCode", "0");
-		 * resultMap.put("msg", "验证码错误，请重新提交或访问showVeriCode换一张图"); return
-		 * Action.SUCCESS; // 向用户输出验证码 } // 登录 int result =
-		 * myLibraryService.login(user.getStuId(), user.getLibaryPass(),
-		 * veriCode);
-		 */
+
+		Map session = ActionContext.getContext().getSession();
+		// 取出HttpClient
+		// HttpClient httpClient = (HttpClient) session.get("userHttpClient");
+		// myLibraryService = new MyLibraryService(httpClient);
+		// 获取登录用户
+		// UserInfo user = (UserInfo)session.get("user");
+		// if (user == null) { // 未登录
+		// resultMap.put("resultCode", "0"); resultMap.put("msg",
+		// "必须先登录，才能访问我的图书馆"); return Action.SUCCESS; } if (veriCode == null)
+		// {// 未输入验证码 // 输出错误提示 resultMap.put("resultCode", "0");
+		// resultMap.put("msg", "验证码错误，请重新提交或访问showVeriCode换一张图"); return
+		// Action.SUCCESS; // 向用户输出验证码 } // 登录 int result =
+		// myLibraryService.login(user.getStuId(), user.getLibaryPass(),
+		// veriCode);
+
 		return Action.SUCCESS;
 	}
 
@@ -193,6 +201,38 @@ public class MyLibraryAction extends ActionSupport {
 
 	public void setPage(String page) {
 		this.page = page;
+	}
+
+	public MyLibraryService getMyLibraryService() {
+		return myLibraryService;
+	}
+
+	public void setMyLibraryService(MyLibraryService myLibraryService) {
+		this.myLibraryService = myLibraryService;
+	}
+
+	public HttpSession getSession() {
+		return session;
+	}
+
+	public void setSession(HttpSession session) {
+		this.session = session;
+	}
+
+	public HttpClient getHttpClient() {
+		return httpClient;
+	}
+
+	public void setHttpClient(HttpClient httpClient) {
+		this.httpClient = httpClient;
+	}
+
+	public void setLibraryUserInfo(LibraryUserInfo libraryUserInfo) {
+		this.libraryUserInfo = libraryUserInfo;
+	}
+
+	public LibraryUserInfo getLibraryUserInfo() {
+		return libraryUserInfo;
 	}
 
 }

@@ -12,7 +12,7 @@
 		<org.springframework-version>4.1.6.RELEASE</org.springframework-version>
 		<junit-version>4.10</junit-version>
 		<struts2-version>2.3.1</struts2-version>
-		<hiberante-version>4.3.11.Final</hiberante-version>
+		<hiberante-version>3.6.10.Final</hiberante-version>
 	</properties>
 	<dependencies>
 		<dependency>

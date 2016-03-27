@@ -10,9 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.SelectBeforeUpdate;
-
 /**
  * 
  * @ClassName User.java Create on 2015-8-28
@@ -26,9 +23,8 @@ import org.hibernate.annotations.SelectBeforeUpdate;
  * @version 1.0
  */
 @Entity
+@org.hibernate.annotations.Entity(dynamicUpdate = true, dynamicInsert = true)
 @Table(name = "gd_user")
-@DynamicUpdate(true)
-@SelectBeforeUpdate(true)
 public class User implements Serializable {
 	/**
 	 * 主键
@@ -93,7 +89,7 @@ public class User implements Serializable {
 	/**
 	 * 用户状态 0表示没有认证 1表示已经认证
 	 */
-	@Column(length=5,columnDefinition="int(5) default 0")
+	@Column(length = 5, columnDefinition = "int(5) default 0")
 	private int status;
 	/**
 	 * 头像地址
@@ -101,12 +97,10 @@ public class User implements Serializable {
 	private String headImg;
 	/**
 	 * 性别
+	 * 
 	 * @return
 	 */
 	private String sex;
-	
-	
-	
 
 	public String getClassId() {
 		return classId;
@@ -246,17 +240,11 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", stuId=" + stuId + ", password=" + password
-				+ ", comfirmPassword=" + comfirmPassword + ", jwcPass="
-				+ jwcPass + ", xnMailPass=" + xnMailPass + ", libaryPass="
-				+ libaryPass + ", realName=" + realName + ", registDate="
-				+ registDate + ", accessTimes=" + accessTimes + ", depart="
-				+ depart + ", marjor=" + marjor + ", telphone=" + telphone
-				+ ", classId=" + classId + ", status=" + status + ", headImg="
-				+ headImg + ", sex=" + sex + "]";
+		return "User [id=" + id + ", stuId=" + stuId + ", password=" + password + ", comfirmPassword=" + comfirmPassword
+				+ ", jwcPass=" + jwcPass + ", xnMailPass=" + xnMailPass + ", libaryPass=" + libaryPass + ", realName="
+				+ realName + ", registDate=" + registDate + ", accessTimes=" + accessTimes + ", depart=" + depart
+				+ ", marjor=" + marjor + ", telphone=" + telphone + ", classId=" + classId + ", status=" + status
+				+ ", headImg=" + headImg + ", sex=" + sex + "]";
 	}
-
-	
-
 
 }
