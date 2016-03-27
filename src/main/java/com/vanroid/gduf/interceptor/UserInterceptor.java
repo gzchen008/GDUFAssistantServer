@@ -1,5 +1,7 @@
 package com.vanroid.gduf.interceptor;
 
+import java.util.HashMap;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionInvocation;
@@ -26,6 +28,10 @@ public class UserInterceptor extends MethodFilterInterceptor {
 		// 拦截登录
 		User qtUser = (User) inv.getInvocationContext().getSession().get("qtUser");
 		if (qtUser == null) {
+			HashMap<String, Object> resultMap = new HashMap<String, Object>();
+			resultMap.put("resultCode", "noLogin");
+			resultMap.put("msg", "未登录，不能使用");
+			ServletActionContext.getRequest().setAttribute("errorResultMap", resultMap);
 			return "error-noLogin";
 		}
 		return inv.invoke();

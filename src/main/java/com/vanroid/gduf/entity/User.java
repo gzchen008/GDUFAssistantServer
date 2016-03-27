@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SelectBeforeUpdate;
+
 /**
  * 
  * @ClassName User.java Create on 2015-8-28
@@ -24,6 +27,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "gd_user")
+@DynamicUpdate(true)
+@SelectBeforeUpdate(true)
 public class User implements Serializable {
 	/**
 	 * 主键

@@ -22,14 +22,26 @@ import com.opensymphony.xwork2.ActionSupport;
 public class ErrorAction extends ActionSupport {
 	private Map<String, Object> resultMap;
 
+	/**
+	 * 没有登录
+	 * @return
+	 */
 	public String noLoginJSON() {
 		return "success";
 	}
 
+	/**
+	 * 没有绑定
+	 * @return
+	 */
 	public String noBondJson() {
 		return "success";
 	}
 
+	/**
+	 * 验证错误
+	 * @return
+	 */
 	public String validateErrorExceptionJson() {
 		return "success";
 

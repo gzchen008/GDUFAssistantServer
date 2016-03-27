@@ -1,6 +1,7 @@
 package com.vanroid.gduf.controller.mail;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.client.HttpClient;
@@ -14,8 +15,10 @@ import com.vanroid.gduf.entity.MailInfo;
 import com.vanroid.gduf.entity.User;
 import com.vanroid.gduf.service.mail.MailService;
 import com.vanroid.gduf.util.HttpClientUtils;
+
 /**
  * 读邮件控制器
+ * 
  * @author CGZ
  *
  */
@@ -32,31 +35,28 @@ public class ReadMailAction extends ActionSupport {
 	@Resource
 	private MailService mailService;
 	/**
-	 * 邮件，返回值 
+	 * 邮件，返回值
 	 */
 	private MailInfo mail;
-	/**
-	 * session
-	 */
-	private HttpSession session ;
+
 	/**
 	 * HttpClient
 	 */
 	private HttpClient httpClient;
-	
-	public ReadMailAction(){
-		session = ServletActionContext.getRequest().getSession();
-		httpClient = HttpClientUtils.getHttpClient(session, null);
+
+	public ReadMailAction() {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		httpClient = HttpClientUtils.getHttpClient(request);
 	}
+
 	/**
 	 * 读邮件方法
+	 * 
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public String readMail() throws Exception{
-		User user = (User) session.getAttribute("qtUser");
-		mailService.login(httpClient,user.getStuId(), user.getXnMailPass());
-		mail = mailService.getMail(httpClient,id);
+	public String readMail() throws Exception {
+		mail = mailService.getMail(httpClient, id);
 		return Action.SUCCESS;
 	}
 
@@ -75,8 +75,5 @@ public class ReadMailAction extends ActionSupport {
 	public void setMail(MailInfo mail) {
 		this.mail = mail;
 	}
-
-
-
 
 }

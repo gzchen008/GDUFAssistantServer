@@ -13,7 +13,7 @@
 	<package name="default" extends="json-default" namespace="/">
 		<interceptors>
 			<interceptor name="userInterceptor" class="com.vanroid.gduf.interceptor.UserInterceptor">
-				<param name="excludeMethods">login,register,search,bindUser</param>
+				<param name="excludeMethods">login,register,search</param>
 			</interceptor>
 
 			<interceptor-stack name="gdufDefalutStack">
