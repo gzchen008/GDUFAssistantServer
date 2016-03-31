@@ -1,12 +1,12 @@
 package com.vanroid.gduf.controller.club;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -222,7 +222,7 @@ public class ClubMessageAction extends ActionSupport implements
 		List<ClubMessage> msglist = (List<ClubMessage>) pageBean.getList();
 		for (int i = 0; i < msglist.size(); i++) {
 			ClubMessage msg = msglist.get(i);
-			Map<String, Object> map = new HashedMap();
+			Map<String, Object> map = new HashMap();
 			map.put("msg_id", msg.getId());
 			map.put("clubName", msg.getClub().getClub_name());
 			map.put("pulishTime", msg.getMessage_publishdate());

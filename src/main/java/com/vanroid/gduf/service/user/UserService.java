@@ -43,5 +43,7 @@ public interface UserService {
 	 * @param qtUser
 	 */
 	public boolean update(User qtUser);
+	
+	
 
 }

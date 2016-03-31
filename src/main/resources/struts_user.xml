@@ -35,5 +35,21 @@
 				<param name="root">resultMap</param>
 			</result>
 		</action>
+		<action name="bindMail" class="BindUserAction" method="bindMail">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<action name="bindJwc" class="BindUserAction" method="bindJwc">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<action name="bindLibrary" class="BindUserAction" method="bindLibrary">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		
 	</package>
 </struts>

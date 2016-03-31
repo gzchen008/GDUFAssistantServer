@@ -13,7 +13,7 @@ import com.vanroid.gduf.entity.LibrarySearchHistory;
 
 @Repository("librarySearchDao")
 public class LibrarySearchDaoImpl implements LibrarySearchDao {
-	
+
 	private HibernateTemplate hibernateTemplate;
 
 	/**
@@ -48,10 +48,9 @@ public class LibrarySearchDaoImpl implements LibrarySearchDao {
 
 	@Override
 	public LibrarySearchHistory search(String keywords, int page) {
-
 		Query query = hibernateTemplate
 				.getSessionFactory()
-				.getCurrentSession()
+				.openSession()
 				.createQuery(
 						"from LibrarySearchHistory as lsh where lsh.keywords ='"
 								+ keywords + "' and lsh.page =" + page);

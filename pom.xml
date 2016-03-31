@@ -12,6 +12,7 @@
 		<org.springframework-version>4.1.6.RELEASE</org.springframework-version>
 		<junit-version>4.10</junit-version>
 		<struts2-version>2.3.1</struts2-version>
+		<hiberante-version>3.6.10.Final</hiberante-version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -55,8 +56,9 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>3.6.5.Final</version>
+			<version>${hiberante-version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
@@ -178,6 +180,7 @@
 			<version>1.5.4</version>
 		</dependency>
 	</dependencies>
+
 
 	<build>
 		<finalName>GdufAssistantServer</finalName>

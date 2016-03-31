@@ -84,7 +84,7 @@ public class LibrarySearchServiceImpl implements LibrarySearchService {
 				LibraryHTML libraryHTML = new LibraryHTML();
 				list = libraryHTML.analysis(result);
 				// 设置值
-				librarySearchHistory.setBooks(new HashSet<BookInfo>(list));
+				librarySearchHistory.setBooks(list);
 				// 设置总记录数
 				librarySearchHistory.setTotal(Integer.parseInt(libraryHTML.getBooksCount()));
 				// 设置当前页

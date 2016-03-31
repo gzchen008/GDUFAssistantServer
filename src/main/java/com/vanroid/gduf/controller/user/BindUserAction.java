@@ -49,6 +49,8 @@ public class BindUserAction extends ActionSupport implements ServletRequestAware
 	private MailService mailService;
 	@Resource
 	private UserService userService;
+	// 用户登录信息
+	private User qtUser = (User) ActionContext.getContext().getSession().get("qtUser");
 	/**
 	 * 用户HttpClient
 	 */
@@ -59,19 +61,79 @@ public class BindUserAction extends ActionSupport implements ServletRequestAware
 	 */
 	private User userForm;
 
-	public String bindUser() throws Exception {
-		// 用户登录信息
-		User qtUser = (User) ActionContext.getContext().getSession().get("qtUser");
-		if (qtUser == null) {
-			return "noLogin";
+	public String bindMail() {
+
+		// 验证校内邮箱
+		boolean mailRes = false;
+		try {
+			mailRes = mailService.login(httpClient, userForm.getStuId(), userForm.getXnMailPass());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		resultMap = new HashMap<String, Object>();
+		if (!mailRes) {
+			resultMap.put("msg", "校内邮箱密码错误！");
+			resultMap.put("resultCode", -1);
+		} else {
+			resultMap.put("msg", "校内邮箱帐户验证成功！");
+			resultMap.put("resultCode", 0);
+			qtUser.setXnMailPass(userForm.getXnMailPass());
+			userService.update(qtUser);
 		}
 
+		return SUCCESS;
+	}
+
+	public String bindJwc() {
+		// 验证教务系统
+		JwcInfo jwcInfo = new JwcInfo();
+		jwcInfo.setXh(userForm.getStuId());
+		jwcInfo.setPassword(userForm.getJwcPass());
+		String jwcRes = jwcLoginService.login(httpClient, jwcInfo);
+		resultMap = new HashMap<String, Object>();
+		if (jwcRes == null || jwcRes.equals("")) {
+			resultMap.put("msg", "教务系统密码错误！");
+			resultMap.put("resultCode", -1);
+		} else {
+			resultMap.put("msg", "教务系统帐户验证成功！");
+			resultMap.put("resultCode", 0);
+			// 获取用户信息
+			User userInfo = new JWCHandler(httpClient).getUserInfo(jwcInfo.getXh(), jwcRes);
+			qtUser.setClassId(userInfo.getClassId());
+			qtUser.setSex(userInfo.getSex());
+			qtUser.setDepart(userInfo.getDepart());
+			qtUser.setMarjor(userInfo.getMarjor());
+			qtUser.setStuId(userForm.getStuId());
+			qtUser.setJwcPass(userForm.getJwcPass());
+			qtUser.setStatus(1); // 已绑定
+			userService.update(qtUser);
+		}
+		return SUCCESS;
+	}
+
+	public String bindLibrary() {
+		// 验证图书馆帐户
+		LibraryUserInfo libUser = myLibraryService.login(httpClient, userForm.getStuId(), userForm.getLibaryPass());
+		resultMap = new HashMap<String, Object>();
+		if (libUser == null) {
+			resultMap.put("msg", "图书馆密码错误！");
+			resultMap.put("resultCode", -1);
+		} else {
+			qtUser.setLibaryPass(userForm.getLibaryPass());
+			userService.update(qtUser);
+			resultMap.put("msg", "图书馆帐户验证成功！");
+			resultMap.put("resultCode", 0);
+		}
+		return SUCCESS;
+	}
+
+	public String bindUser() throws Exception {
 		resultMap = new HashMap<String, Object>();
 
 		if (userForm.getStuId() == null || userForm.getJwcPass() == null || userForm.getLibaryPass() == null
 				|| userForm.getXnMailPass() == null) {
 			resultMap.put("resultCode", -1);
-			resultMap.put("msg", "学号和学校各密码不能为空！");
+			resultMap.put("msg", "学号和学校各系统密码不能为空！");
 			return SUCCESS;
 		}
 

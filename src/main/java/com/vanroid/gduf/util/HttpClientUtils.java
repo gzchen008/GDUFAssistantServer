@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.Header;
@@ -26,6 +27,8 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.vanroid.gduf.entity.User;
+
 /**
  * 
  * @ClassName HttpClientUtils.java Create on 2015-8-28
@@ -41,86 +44,16 @@ import org.apache.http.util.EntityUtils;
 public class HttpClientUtils {
 
 	/**
-	 * 通过用户session获取专属HTTPClient
-	 * 
-	 * @param session
-	 * @return
-	 */
-	public static CloseableHttpClient getHttpClient(HttpSession session,
-			BasicCookieStore cookieStore) {
-		if (session == null) {
-			return createDefaultHttpClient(cookieStore);
-		}
-		CloseableHttpClient myHttpClient = (CloseableHttpClient) session
-				.getAttribute("myHttpClient");
-		if (myHttpClient == null) {
-			myHttpClient = createDefaultHttpClient(cookieStore);
-			// 存入session中
-			session.setAttribute("myHttpClient", myHttpClient);
-		}
-		return myHttpClient;
-
-	}
-
-	/**
 	 * 创建一个默认的HttpCLient
 	 * 
 	 * @return
 	 */
-	public static CloseableHttpClient createDefaultHttpClient(
-			BasicCookieStore cookieStore) {
+	public static CloseableHttpClient createDefaultHttpClient(BasicCookieStore cookieStore) {
 		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
-		cm.setDefaultSocketConfig(SocketConfig.custom().setSoKeepAlive(true)
-				.setSoReuseAddress(true).setSoTimeout(3000).build());
+		cm.setDefaultSocketConfig(
+				SocketConfig.custom().setSoKeepAlive(true).setSoReuseAddress(true).setSoTimeout(3000).build());
 		cm.setMaxTotal(120);
-		return HttpClients.custom().setDefaultCookieStore(cookieStore)
-				.setConnectionManager(cm).build();
-	}
-
-	/**
-	 * 传入session的get方法
-	 * 
-	 * @param session
-	 * @param url
-	 * @param headers
-	 * @param params
-	 * @return
-	 * @throws ClientProtocolException
-	 * @throws IOException
-	 */
-	public static HttpResult get(HttpSession session, String url,
-			Map<String, String> headers, Map<String, String> params)
-			throws ClientProtocolException, IOException {
-
-		BasicCookieStore cookieStore = new BasicCookieStore();
-		// 获取client
-		CloseableHttpClient client = getHttpClient(session, cookieStore);
-		return get(client, url, headers, params);
-
-	}
-
-	/**
-	 * 传入session的post方法
-	 * 
-	 * @param session
-	 * @param url
-	 * @param headers
-	 * @param params
-	 * @param encoding
-	 * @return
-	 * @throws ClientProtocolException
-	 * @throws IOException
-	 */
-	public static HttpResult post(HttpSession session, String url,
-			Map<String, String> headers, Map<String, String> params,
-			String encoding) throws ClientProtocolException, IOException {
-
-		BasicCookieStore cookieStore = new BasicCookieStore();
-
-		// 获取client
-		CloseableHttpClient client = getHttpClient(session, cookieStore);
-
-		return post(client, url, headers, params, encoding);
+		return HttpClients.custom().setDefaultCookieStore(cookieStore).setConnectionManager(cm).build();
 	}
 
 	/**
@@ -149,13 +82,11 @@ public class HttpClientUtils {
 	 */
 	private static Header[] getDefaultHeaders() {
 		Header[] allHeader = new BasicHeader[4];
-		allHeader[0] = new BasicHeader("Content-Type",
-				"application/x-www-form-urlencoded");
-		allHeader[1] = new BasicHeader(
-				"User-Agent",
+		allHeader[0] = new BasicHeader("Content-Type", "application/x-www-form-urlencoded");
+		allHeader[1] = new BasicHeader("User-Agent",
 				"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.146 Safari/537.36");
-		allHeader[2] = new BasicHeader("Accept","text/html, application/xhtml+xml, */*");
-		allHeader[3] = new BasicHeader("Connection","Keep-Alive");
+		allHeader[2] = new BasicHeader("Accept", "text/html, application/xhtml+xml, */*");
+		allHeader[3] = new BasicHeader("Connection", "Keep-Alive");
 		return allHeader;
 	}
 
@@ -200,8 +131,7 @@ public class HttpClientUtils {
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	public static HttpResult get(HttpClient client, String url,
-			Map<String, String> headers, Map<String, String> params)
+	public static HttpResult get(HttpClient client, String url, Map<String, String> headers, Map<String, String> params)
 			throws ClientProtocolException, IOException {
 		BasicCookieStore cookieStore = new BasicCookieStore();
 		url = (null == params ? url : url + "?" + parseParam(params));
@@ -209,7 +139,6 @@ public class HttpClientUtils {
 		HttpGet get = new HttpGet(url);
 		get.setHeaders(parseHeader(headers));
 
-		
 		HttpResponse response = client.execute(get);
 		HttpEntity entity = response.getEntity();
 
@@ -241,25 +170,20 @@ public class HttpClientUtils {
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	public static HttpResult post(HttpClient httpClient, String url,
-			Map<String, String> headers, Map<String, String> params,
-			String encoding) throws ClientProtocolException, IOException {
+	public static HttpResult post(HttpClient httpClient, String url, Map<String, String> headers,
+			Map<String, String> params, String encoding) throws ClientProtocolException, IOException {
 		BasicCookieStore cookieStore = new BasicCookieStore();
 		CloseableHttpClient client = (CloseableHttpClient) httpClient;
 		HttpPost post = new HttpPost(url);
 		post.setHeaders(parseHeader(headers));
-		
-		
+
 		List<NameValuePair> list = new ArrayList<NameValuePair>();
 		for (String temp : params.keySet()) {
 			list.add(new BasicNameValuePair(temp, params.get(temp)));
 		}
 		post.setEntity(new UrlEncodedFormEntity(list, encoding));
 
-		
-
-		CloseableHttpResponse response = (CloseableHttpResponse) client
-				.execute(post);
+		CloseableHttpResponse response = (CloseableHttpResponse) client.execute(post);
 		HttpEntity entity = response.getEntity();
 
 		HttpResult result = new HttpResult();
@@ -276,6 +200,27 @@ public class HttpClientUtils {
 
 		result.setBody(EntityUtils.toString(entity));
 		return result;
+	}
+
+	/**
+	 * 获取用户专属HttpClient
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public static CloseableHttpClient getHttpClient(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		return getHttpClient(session, new BasicCookieStore());
+	}
+
+	public static CloseableHttpClient getHttpClient(HttpSession session, BasicCookieStore cookieStore) {
+		CloseableHttpClient myHttpClient = (CloseableHttpClient) session.getAttribute("myHttpClient");
+		if (myHttpClient == null) {
+			myHttpClient = createDefaultHttpClient(cookieStore);
+			// 存入session中
+			session.setAttribute("myHttpClient", myHttpClient);
+		}
+		return myHttpClient;
 	}
 
 }

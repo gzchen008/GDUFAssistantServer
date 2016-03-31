@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.Servlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.http.impl.client.BasicCookieStore;
@@ -43,7 +44,8 @@ public class MailAction extends ActionSupport {
 
 	/**
 	 * 查找某页的邮件
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	public String getPageMails() throws Exception {
 		// 获取页码
@@ -52,22 +54,10 @@ public class MailAction extends ActionSupport {
 		if (page == null || page.equals("")) {
 			page = "1";
 		}
-		// 获取session
-		Map session = ActionContext.getContext().getSession();
-		// 从session中取出user
-		User user = (User) session.get("qtUser");
+		// 获取httpClient
+		CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(request);
+		mailList = mailService.getMails(httpClient, Integer.parseInt(page));
 
-		CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(
-				request.getSession(), new BasicCookieStore());
-		// 使用user中的用户名密码登录
-		boolean isLogin = mailService.login(httpClient, user.getStuId(),
-				user.getXnMailPass());
-		if(!isLogin){
-			throw new ValidateErrorException("校内邮箱密码错误！");
-		}
-		if (isLogin) {
-			mailList = mailService.getMails(httpClient, Integer.parseInt(page));
-		}
 		return Action.SUCCESS;
 
 	}
@@ -75,7 +65,7 @@ public class MailAction extends ActionSupport {
 	public List<MailInfo> getMailList() {
 		return mailList;
 	}
-	
+
 	public void setMailList(List<MailInfo> mailList) {
 		this.mailList = mailList;
 	}
