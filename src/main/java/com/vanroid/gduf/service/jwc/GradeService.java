@@ -1,5 +1,7 @@
 package com.vanroid.gduf.service.jwc;
 
+import javax.servlet.http.HttpSession;
+
 import com.vanroid.gduf.entity.Grade;
 import com.vanroid.gduf.service.impl.jwc.JWCHandler;
 
@@ -23,7 +25,7 @@ public interface GradeService {
 
 	public Grade query();
 
-	public Grade getGradeInfo(JWCHandler handler, Grade grade, String xm);
+	public Grade getGradeInfo(HttpSession session,Grade grade, String xm);
 
 	public Grade queryExistInDb(Grade c);
 }

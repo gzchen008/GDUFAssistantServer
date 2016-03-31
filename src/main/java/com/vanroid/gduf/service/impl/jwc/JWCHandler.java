@@ -2,6 +2,8 @@ package com.vanroid.gduf.service.impl.jwc;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -118,6 +120,8 @@ public class JWCHandler {
 			code = getCourseCode(xh, url, v, year, xq);
 			list = coursehtmlHandler.execute(code);
 		}
+		if(list==null)
+			return null;
 		Set<ClassBean> set = new HashSet<ClassBean>(list);
 		course.setClasses(set);
 		return course;
@@ -177,6 +181,8 @@ public class JWCHandler {
 		String v = getViewState(xh, gradeurl);
 		String code = getGradeCode(gradeurl, v, xh,year, xq);
 		List<Subject> list = gradehtmlHandler.execute(code);
+		if(list.size()==0)
+			return null;
 		Set<Subject> set = new HashSet<Subject>(list);
 		grade.setSubjects(set);
 		return grade;

@@ -55,9 +55,7 @@ public class JwcAction extends ActionSupport implements ModelDriven<JwcInfo> {
 	 * @param JwcLoginInfo类中的stuid和Jwcpassword
 	 */
 	public String login() {
-		CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(session,
-				new BasicCookieStore());
-		String xm = loginService.login(httpClient, info);
+		String xm = loginService.login(session, info);
 		if (!(xm == null || "".equals(xm))) {
 			session.setAttribute("userName", xm);
 			return Action.SUCCESS;
@@ -74,15 +72,16 @@ public class JwcAction extends ActionSupport implements ModelDriven<JwcInfo> {
 	 *            ,year,xq和登陆成功后返回的xm
 	 */
 	public String getCourse() {
-		CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(session,
+		/*CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(session,
 				new BasicCookieStore());
 		// 先登陆获取姓名
 		String xm = loginService.login(httpClient, info);
 		if (!(xm == null || "".equals(xm)))
-			System.out.println("--------登陆jwc成功-------");
+			System.out.println("--------登陆jwc成功-------");*/
+		/*if(loginService.login(session,info)=="Action.ERROR")
+			return Action.ERROR;*/
 		Course course = new Course(info.getXh(), info.getYear(), info.getXq());
-		Course validCourse = courseService.getCourseInfo(new JWCHandler(
-				httpClient), course, xm);
+		Course validCourse = courseService.getCourseInfo(session, course, info.getXm());
 		if (validCourse != null && validCourse.getClasses().size() > 0) {
 			resultMap.put("resultCode", 1);
 			resultMap.put("msg", "课程表获取成功");
@@ -104,14 +103,16 @@ public class JwcAction extends ActionSupport implements ModelDriven<JwcInfo> {
 	 *            ,year,xq和登陆成功后返回的xm
 	 */
 	public String getGrade() {
-		CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(session,
+		/*CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(session,
 				new BasicCookieStore());
 		// 先登陆获取姓名
 		String xm = loginService.login(httpClient, info);
 		if (!(xm == null || "".equals(xm)))
-			System.out.println("--------登陆jwc成功-------");
+			System.out.println("--------登陆jwc成功-------");*/
+		/*if(loginService.login(session,info)=="Action.ERROR")
+			return Action.ERROR;*/
 		Grade grade = new Grade(info.getXh(), info.getYear(), info.getXq());
-		Grade validGrade = gradeService.getGradeInfo(new JWCHandler(httpClient),grade, xm);
+		Grade validGrade = gradeService.getGradeInfo(session,grade, info.getXm());
 		if (validGrade != null && validGrade.getSubjects().size() > 0) {
 			resultMap.put("resultCode", 1);
 			resultMap.put("msg", "成绩表获取成功");

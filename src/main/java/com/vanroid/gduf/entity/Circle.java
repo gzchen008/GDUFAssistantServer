@@ -1,6 +1,9 @@
 package com.vanroid.gduf.entity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,9 +11,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  * 
@@ -26,12 +32,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "gd_circle")
-public class Circle {
+public class Circle implements Serializable{
 	private int tid;
 	private User sender;
 	private Date createTime;
 	private String content;
-	private String imagePath;
+	private List<ImagePath> images = new ArrayList<ImagePath>();
+	private List<Comment> comments = new ArrayList<Comment>();
 
 	@Id
 	@GeneratedValue
@@ -41,6 +48,22 @@ public class Circle {
 
 	public void setTid(int tid) {
 		this.tid = tid;
+	}
+
+	@OneToMany(mappedBy = "tid", targetEntity = ImagePath.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)  
+	public List<ImagePath> getImages() {
+		return images;
+	}
+
+	@OneToMany(mappedBy = "tid", targetEntity = Comment.class,cascade=CascadeType.ALL,fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)  
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setImages(List<ImagePath> images) {
+		this.images = images;
 	}
 
 	@ManyToOne(targetEntity = User.class)
@@ -69,12 +92,8 @@ public class Circle {
 		this.content = content;
 	}
 
-	public String getImagePath() {
-		return imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.vanroid.gduf.service.jwc;
 
+import javax.servlet.http.HttpSession;
+
 import com.vanroid.gduf.entity.Course;
 import com.vanroid.gduf.service.impl.jwc.JWCHandler;
 
@@ -22,15 +24,11 @@ public interface CourseService {
 	public void update(Course c);
 
 	public Course query();
+	
 	/**
 	 * 获取课程信息
-	 * @param handler
-	 * @param course
-	 * @param xm
-	 * @return
 	 */
-
-	public Course getCourseInfo(JWCHandler handler, Course course, String xm);
+	public Course getCourseInfo(HttpSession session,Course course, String xm);
 
 	public Course queryExistInDb(Course c);
 }

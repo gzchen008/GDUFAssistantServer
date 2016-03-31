@@ -3,13 +3,17 @@ package com.vanroid.gduf.service.impl.jwc;
 import java.io.IOException;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.springframework.stereotype.Service;
 
 import com.vanroid.gduf.dao.jwc.CourseDao;
 import com.vanroid.gduf.entity.Course;
 import com.vanroid.gduf.service.jwc.CourseService;
+import com.vanroid.gduf.util.HttpClientUtils;
 
 /**
  * 
@@ -30,8 +34,11 @@ public class CourseServiceImpl implements CourseService {
 	/**
 	 * 先查询数据库中是否含有该课程信息，如果没有再到网上获取，获取后再存入数据库 该传入参数的course必须传入年份、学期、学号！
 	 */
-	public Course getCourseInfo(JWCHandler handler,Course course, String xm) {
+	public Course getCourseInfo(HttpSession session,Course course, String xm) {
 		// TODO 自动生成的方法存根
+		CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(session,
+				new BasicCookieStore());
+		JWCHandler handler=new JWCHandler(httpClient);
 		Course backCourse=queryExistInDb(course);
 		if ( backCourse!= null) {
 			System.out.println("-------从缓存中获取---------");

@@ -4,16 +4,65 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+	<constant name="struts.multipart.paeser" value="jakarta" />
+	<constant name="struts.multipart.saveDir" value="/tmp" />
+	<constant name="struts.devMode" value="true" />
 	<package name="jwc" extends="default" namespace="/jwc">
+		<interceptors>
+			<interceptor name="JWCInterceptor"
+				class="com.vanroid.gduf.interceptor.JWCInterceptor"></interceptor>
+		</interceptors>
 		<!-- 获取课程表的action -->
 		<action name="getCourse" class="jwcAction" method="getCourse">
+			<interceptor-ref name="gdufDefalutStack"></interceptor-ref>
+			<interceptor-ref name="JWCInterceptor"></interceptor-ref>
 			<result type="json">
 				<param name="root">resultMap</param>
 			</result>
 		</action>
 		<action name="getGrade" class="jwcAction" method="getGrade">
+			<interceptor-ref name="gdufDefalutStack"></interceptor-ref>
+			<interceptor-ref name="JWCInterceptor"></interceptor-ref>
 			<result type="json">
 				<param name="root">resultMap</param>
+			</result>
+		</action>
+	</package>
+	<package name="circle" extends="struts-default,json-default"
+		namespace="/circle">
+
+		<action name="queryCircles" class="circleAction" method="queryCircles">
+			<result name="success">/WEB-INF/jsps/circle/circlelist.jsp
+			</result>
+
+		</action>
+		<action name="queryCirclesJson" class="circleAction" method="queryCircles">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+
+		</action>
+		<action name="addCircle" class="circleAction" method="addCircle">
+			<result name="success">/circlelist.jsp</result>
+			<result name="input" type="redirect">/WEB-INF/jsps/circle/addcircle.jsp
+			</result>
+		</action>
+		<!-- 添加评论和点赞 -->
+
+		<action name="addCommentjson" class="commentAction" method="addComment">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<!-- 删除评论 -->
+
+		<action name="deleteCommentjson" class="commentAction" method="deleteCommentJson">
+			<result type="json">
+				<param name="root">resultMap</param>
+			</result>
+		</action>
+		<action name="queryMyNotifaction" class="notifactionAction">
+			<result name="success">/WEB-INF/jsps/circle/meslist.jsp
 			</result>
 		</action>
 	</package>
