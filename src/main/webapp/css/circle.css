@@ -1,0 +1,149 @@
+.title{
+	position:fixed;
+	width:100%;
+
+	
+}
+.mediv {
+	padding-top:60px;
+	margin-bottom: 30px;
+	height: 80px;
+	width: inherit;
+}
+
+#me {
+	margin: 10px;
+	height: 80px;
+	width: 80px;
+	float: right;
+}
+
+.other {
+	height: 60px;
+	width: 60px;
+	float: left;
+	display: block;
+}
+
+.content {
+	height: auto;
+	width: auto;
+	padding: 30px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	border-bottom: 3px solid lightgrey;
+}
+
+.imagetext {
+	height: auto;
+	width: auto;
+	background-color: white;
+	margin-bottom: 40px;
+}
+
+.text {
+	margin: 5px;
+}
+
+.one {
+	height: auto;
+	width: auto;
+	padding: 5px;
+	background-color: lightgrey;
+}
+
+.bottomline {
+	margin-bottom: 1px;
+}
+
+.support {
+	height: 30px;
+	width: auto;
+	margin: 2px;
+}
+
+.rounded-half {
+	width: 100px;
+	height:100px;
+	margin: 10px 5px ;
+	display: inline-block;
+	/* -moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px; */
+	background-color: #ececec;
+	border: 1px #d7d7d7 solid;
+	padding: 2px;
+}
+
+.shadow {
+	width: 100px;
+	height:100px;
+	display: block;
+	margin-bottom: 15px;
+	border-top: 1px #fff solid;
+}
+
+
+
+.input {
+	margin-top: 4px;
+	margin-bottom:4px;
+	margin-right:4px;
+}
+
+.time {
+	margin: 3px;
+	margin-bottom: 1px;
+	font-size: small;
+	font-style: italic;
+	font-family: Consolas;
+}
+
+.morelist {
+	height: 25px;
+	width: auto;
+	text-align: center;
+	background-color: #CCCCCC;
+}
+
+#sform {
+	width: 100%;
+	height: auto;
+	padding: 15px;
+}
+
+.mysupport {
+	margin: 0px 3px;
+}
+
+#inputtext {
+	width: 100%;
+	margin-bottom: 20px
+}
+
+.addimgborder {
+	border: 3px solid #CCCCCC;
+	width: 50px;
+	height: 50px;
+	margin: 5px;
+	font-size: 32px;
+	text-align: center;
+	color: #CCCCCC;
+}
+
+.btnsend {
+	text-align: right;
+	margin-bottom: 6px
+}
+
+.previmg {
+	display: inline-block;
+	border: 3px solid lightgrey;
+	margin: 3px;
+}
+.littlepicture {
+	margin: 10px;
+	height: 80px;
+	width: 80px;
+	float: right;
+}

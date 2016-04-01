@@ -11,6 +11,7 @@ import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.vanroid.gduf.dao.circle.CircleDao;
 import com.vanroid.gduf.entity.CircleMes;
+import com.vanroid.gduf.entity.User;
 
 /**
  * 
@@ -27,9 +28,10 @@ import com.vanroid.gduf.entity.CircleMes;
 @Controller("notifactionAction")
 public class NotifactionAction extends ActionSupport {
 	private CircleDao circleDao;
-	private int myId;
 
 	public String execute() {
+		User user=(User) ServletActionContext.getRequest().getSession().getAttribute("qtUser");
+		int myId=user.getId();
 		List<CircleMes> list=circleDao.findMyNotifaction(myId);
 		ServletActionContext.getRequest().setAttribute("myNotifaction", list);
 		return Action.SUCCESS;
@@ -44,12 +46,4 @@ public class NotifactionAction extends ActionSupport {
 		this.circleDao = circleDao;
 	}
 
-	public int getMyId() {
-		return myId;
-	}
-
-	public void setMyId(int myId) {
-		this.myId = myId;
-	}
-	
 }

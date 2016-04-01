@@ -29,14 +29,17 @@ import com.vanroid.gduf.service.circle.UpImgUtil;
 @Scope("prototype")
 public class CircleAction extends ActionSupport implements ModelDriven<Circle> {
 	private CircleService circleService;
-	Map<String,Object> resultMap=new HashMap<String,Object>();
+	Map<String, Object> resultMap = new HashMap<String, Object>();
 	private int myId;
 	private int stuId;
-	private int listnum;//显示更多朋友圈时的朋友圈序号
+	private int listnum;// 显示更多朋友圈时的朋友圈序号
 	private Circle circle = new Circle();
 	private String[] imgCode;// 前台传过来的图片base64码
-   private List<File> img;// 上传的图片
+	private List<File> img;// 上传的图片
 	
+	public String addCirclePage(){
+		return Action.SUCCESS;
+	}
 
 	/**
 	 * 添加朋友圈
@@ -46,12 +49,13 @@ public class CircleAction extends ActionSupport implements ModelDriven<Circle> {
 	 */
 	public String addCircle() throws IOException {
 		System.out.println("进入方法中……");
-		String path=ServletActionContext.getServletContext().getRealPath("/")+"picture";
-		System.out.println("path"+path);
-		
-		System.out.println("sender:"+circle.getSender().getId());
+		String path = ServletActionContext.getServletContext().getRealPath("/")
+				+ "picture";
+		System.out.println("path" + path);
+
+		System.out.println("sender:" + circle.getSender().getId());
 		if (img != null) {
-			List<ImagePath> imges = UpImgUtil.imghanlder(circle, img,path);
+			List<ImagePath> imges = UpImgUtil.imghanlder(circle, img, path);
 			circle.setImages(imges);
 		}
 		System.out.println("shuju" + circle.getImages().size());
@@ -78,18 +82,21 @@ public class CircleAction extends ActionSupport implements ModelDriven<Circle> {
 	 * @return
 	 */
 	public String queryCircles() {
-		
-		ServletActionContext.getRequest().getSession()
-				.setAttribute("myId", myId);
-		ServletActionContext.getRequest().getSession()
-		.setAttribute("myStuId", stuId);		
+		//首页需要设置id和stuId
+		if (listnum == 0) {
+			User user = (User) ServletActionContext.getRequest().getSession()
+					.getAttribute("qtUser");
+			ServletActionContext.getRequest().getSession()
+					.setAttribute("myId", user.getId());
+			ServletActionContext.getRequest().getSession()
+					.setAttribute("myStuId", user.getStuId());
+		}
 		List<Circle> circleList = circleService.queryCircles(listnum, 10);
 		ServletActionContext.getRequest().getSession()
 				.setAttribute("circles", circleList);
 		resultMap.put("circleList", circleList);
 		return Action.SUCCESS;
 	}
-	
 
 	public CircleService getCircleService() {
 		return circleService;
@@ -129,7 +136,7 @@ public class CircleAction extends ActionSupport implements ModelDriven<Circle> {
 	public void setMyId(int myId) {
 		this.myId = myId;
 	}
-	
+
 	public List<File> getImg() {
 		return img;
 	}

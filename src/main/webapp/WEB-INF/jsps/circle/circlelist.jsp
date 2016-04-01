@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -7,26 +7,26 @@
 <title>广金圈</title>
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="../css/circle.css" type="text/css">
-<link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
-<script src="../js/jquery.min.js"></script>
-<script src="../js/myjquery.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/circle.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css">
+<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/myjquery.js"></script>
 <body>
 	<!--导航条-->
 	<ul class=" nav nav-pills title">
 		<li role="presentation"><a href="javaScript:void(0);">返回</a></li>
-		<li role="presentation" class="active"><a href="../addcircle2.jsp">添加</a></li>
+		<li role="presentation" class="active"><a href="${pageContext.request.contextPath}/circle/addCirclePage">添加</a></li>
 	</ul>
 	<!--右上角头像-->
 	<div class="mediv">
 	<a href="queryMyNotifaction.action?myId=${sessionScope.myId}">
-		<img id="me" src="../img/img1.jpg"></a>
+		<img id="me" src="${pageContext.request.contextPath}/img/img1.jpg"></a>
 	</div>
 	<c:forEach items="${sessionScope.circles}" var="circle">
 		<div class="content">
 			<!--头像和文字-->
 			<div class="imagetext">
-				<img class="other" src="../img/img1.jpg">
+				<img class="other" src="${pageContext.request.contextPath}/img/img1.jpg">
 
 
 				${circle.sender.stuId}<br> ${circle.content}
@@ -36,9 +36,9 @@
 			<c:if test="${!empty circle.images }">
 				<c:forEach items="${circle.images}" var="image">
 					
-						<a href="../picture/${image.path}" class="apic"> <img
-							src="../picture/${image.path}" border="0" class="rounded-half" /></a>
-							<!-- <img src="../img/shadow.jpg" border="0" class="shadow" /> -->
+						<a href="${pageContext.request.contextPath}/picture/${image.path}" class="apic"> <img
+							src="${pageContext.request.contextPath}/picture/${image.path}" border="0" class="rounded-half" /></a>
+							<!-- <img src="${pageContext.request.contextPath}/img/shadow.jpg" border="0" class="shadow" /> -->
 					
 				</c:forEach>
 			</c:if>
@@ -49,7 +49,7 @@
 			<div id="sup${circle.tid}" class="one bottomline">
 				<a href="javascript:void(0);"
 					onclick="support(${circle.sender.id},${circle.tid})"> <img
-					class="support" src="../img/support.png" /></a>
+					class="support" src="${pageContext.request.contextPath}/img/support.png" /></a>
 				<c:forEach items="${circle.comments }" var="comment">
 					<c:if test="${empty comment.text }">
 				<!-- 如果点赞人是自己，则加一个span标签，方便后续取消点赞使用 -->
@@ -205,7 +205,7 @@
 												var list = data.circleList;
 												for (var i = 0; i < list.length; i++) {
 													var
-													str = "<div class='content'><div class='imagetext'><img class='other' src='../img/img1.jpg'>"
+													str = "<div class='content'><div class='imagetext'><img class='other' src='${pageContext.request.contextPath}/img/img1.jpg'>"
 															+ list[i].sender.stuId
 															+ "<br> "
 															+ list[i].content
@@ -216,7 +216,7 @@
 													if(0!=images.length){
 														
 														for(var k=0;k<images.length;k++){
- 															str+="<a href='../picture/"+images[k].path+"'><img src='../picture/"+images[k].path+"' border='0' class='rounded-half' /></a>";
+ 															str+="<a href='${pageContext.request.contextPath}/picture/"+images[k].path+"'><img src='${pageContext.request.contextPath}/picture/"+images[k].path+"' border='0' class='rounded-half' /></a>";
   															 console.log(images[k].path); 
 													}
 														}
@@ -224,7 +224,7 @@
 													str+="<div class='time'>"
 													+ list[i].createTime
 													+ "</div>";
-													str+="<div id='sup"+list[i].tid+"' class='one bottomline'><a href='javascript:void(0);' onclick='support("+list[i].sender.id+","+list[i].tid+")'><img class='support' src='../img/support.png' /></a>";
+													str+="<div id='sup"+list[i].tid+"' class='one bottomline'><a href='javascript:void(0);' onclick='support("+list[i].sender.id+","+list[i].tid+")'><img class='support' src='${pageContext.request.contextPath}/img/support.png' /></a>";
 													/* 点赞 */
 													var comments=list[i].comments;
 													for(var k=0;k<comments.length;k++){
@@ -268,7 +268,7 @@
 	function noFindImg(){
 		j(document).ready(function(){
 			$(".rounded-half").error(function(){
-				  $(this).attr({ src: "../img/error.jpg", alt: "图片丢失"});
+				  $(this).attr({ src: "${pageContext.request.contextPath}/img/error.jpg", alt: "图片丢失"});
 				  $(this).parent().attr({href:"javaScript:void(0);"});
 				});
 	});

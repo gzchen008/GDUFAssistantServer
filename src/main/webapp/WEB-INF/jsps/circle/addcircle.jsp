@@ -5,16 +5,16 @@
 <head>
 <title>添加朋友圈</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="./css/circle.css" type="text/css">
-<link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
-<script src="./js/jquery.min.js"></script>
-<script src=".js/upload.js"></script>
-<script src=".js/mobileBUGFix.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/circle.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" type="text/css">
+<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}js/upload.js"></script>
+<script src="${pageContext.request.contextPath}js/mobileBUGFix.min.js"></script>
 
 </head>
 <s:fielderror />
 <body>
-	<form id="sform" namespace="/circle" action="circle/addCircle.action"
+	<form id="sform" namespace="/circle" action="${pageContext.request.contextPath}/circle/addCircle.action"
 		method="post" enctype="multipart/form-data"  >
 		<!-- 发送按钮 -->
 		<div class="btnsend">

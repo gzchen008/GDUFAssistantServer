@@ -38,10 +38,10 @@ public class CommentAction extends ActionSupport  {
 			if(!circleService.isSupported(comment)){	//查询是否已经点赞过了
 				System.out.println("开启点赞");
 				circleService.addComment(comment);
-				/*//操作后更新session内容
+				//操作后更新session内容
 				List<Circle> circleList=circleService.queryCircles(0, 3);
 				ServletActionContext.getRequest().getSession().setAttribute("circles", circleList);
-*/					
+					
 				//添加通知
 				circleService.addNotifaction(new CircleMes(comment.getTid(), comment.getSender(), comment.getReceiver(), "❤", "noread"));
 

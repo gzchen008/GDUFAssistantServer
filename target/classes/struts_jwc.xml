@@ -42,8 +42,12 @@
 			</result>
 
 		</action>
+		<action name="addCirclePage" class="circleAction" method="addCirclePage">
+			<result name="success" >/WEB-INF/jsps/circle/addcircle.jsp
+			</result>
+		</action>
 		<action name="addCircle" class="circleAction" method="addCircle">
-			<result name="success">/circlelist.jsp</result>
+			<result name="success" type="redirectAction">queryCircles</result>
 			<result name="input" type="redirect">/WEB-INF/jsps/circle/addcircle.jsp
 			</result>
 		</action>
