@@ -105,6 +105,7 @@ public class BindUserAction extends ActionSupport implements ServletRequestAware
 			qtUser.setMarjor(userInfo.getMarjor());
 			qtUser.setStuId(userForm.getStuId());
 			qtUser.setJwcPass(userForm.getJwcPass());
+			qtUser.setRealName(userInfo.getRealName());
 			qtUser.setStatus(1); // 已绑定
 			userService.update(qtUser);
 		}
@@ -172,6 +173,7 @@ public class BindUserAction extends ActionSupport implements ServletRequestAware
 			qtUser.setJwcPass(userForm.getJwcPass());
 			qtUser.setXnMailPass(userForm.getXnMailPass());
 			qtUser.setLibaryPass(userForm.getLibaryPass());
+			qtUser.setRealName(userInfo.getRealName());
 			qtUser.setStatus(1); // 已绑定
 
 			userService.update(qtUser);

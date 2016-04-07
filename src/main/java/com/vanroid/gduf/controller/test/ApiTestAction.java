@@ -25,7 +25,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Controller("ApiTestAction")
 @Scope("prototype")
 @ParentPackage("struts-default")
-@Namespace(value = "/api/test")
+@Namespace(value = "/api")
 public class ApiTestAction extends ActionSupport {
 
 	/**
@@ -33,7 +33,7 @@ public class ApiTestAction extends ActionSupport {
 	 * 
 	 * @return
 	 */
-	@Action(value = "", results = { @Result(location = "/WEB-INF/jsps/test/index.jsp") })
+	@Action(value = "test", results = { @Result(location = "/WEB-INF/jsps/test/index.jsp") })
 	public String testPage() {
 		HttpServletRequest req = ServletActionContext.getRequest();
 		String baseUrl = req.getContextPath();
