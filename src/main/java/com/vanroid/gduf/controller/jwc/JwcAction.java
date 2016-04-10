@@ -80,6 +80,7 @@ public class JwcAction extends ActionSupport implements ModelDriven<JwcInfo> {
 			System.out.println("--------登陆jwc成功-------");*/
 		/*if(loginService.login(session,info)=="Action.ERROR")
 			return Action.ERROR;*/
+		System.out.println(info.getXh()+info.getXm());
 		Course course = new Course(info.getXh(), info.getYear(), info.getXq());
 		Course validCourse = courseService.getCourseInfo(session, course, info.getXm());
 		if (validCourse != null && validCourse.getClasses().size() > 0) {

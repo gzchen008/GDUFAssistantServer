@@ -1,4 +1,4 @@
-package com.vanroid.gduf.test.service.jwc;
+/*package com.vanroid.gduf.test.service.jwc;
 
 import javax.annotation.Resource;
 
@@ -51,3 +51,4 @@ public class CourseServiceTest {
 	
 	
 }
+*/
