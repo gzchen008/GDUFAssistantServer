@@ -31,8 +31,7 @@ import freemarker.template.utility.StringUtil;
 public class JwcLoginService {
 
 	public String login(HttpSession session, JwcInfo info) {
-		CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(session,
-				new BasicCookieStore());
+		CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(session, new BasicCookieStore());
 		JWCHandler handler = new JWCHandler(httpClient);
 		String xm = null;
 		// TODO 自动生成的构造函数存根
@@ -48,30 +47,21 @@ public class JwcLoginService {
 		return xm;
 
 	}
-	public String login(HttpClient httpClient, JwcInfo info) {
-		
+
+	public String login(HttpClient httpClient, JwcInfo info) throws ClientProtocolException, IOException {
+
 		JWCHandler handler = new JWCHandler(httpClient);
 		String xm = null;
-		// TODO 自动生成的构造函数存根
-		try {
-			xm = handler.login(info);
-		} catch (ClientProtocolException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
+		xm = handler.login(info);
 		return xm;
-
 	}
-	public boolean login(HttpClient httpClient, String stuId,
-			String jwcPass) {
+
+	public boolean login(HttpClient httpClient, String stuId, String jwcPass) {
 		JWCHandler handler = new JWCHandler(httpClient);
-		JwcInfo info=new JwcInfo();
+		JwcInfo info = new JwcInfo();
 		info.setXh(stuId);
 		info.setPassword(jwcPass);
-		String xm=null;
+		String xm = null;
 		// TODO 自动生成的构造函数存根
 		try {
 			xm = handler.login(info);
@@ -82,6 +72,6 @@ public class JwcLoginService {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
-		return xm==null?false:true;
+		return xm == null ? false : true;
 	}
 }
