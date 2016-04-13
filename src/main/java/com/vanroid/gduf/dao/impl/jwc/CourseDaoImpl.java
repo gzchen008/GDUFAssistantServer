@@ -30,7 +30,10 @@ public class CourseDaoImpl implements CourseDao {
 	@Override
 	public void add(Course c) {
 		// TODO 自动生成的方法存根
-		hibernateTemplate.save(c);
+		try {
+			hibernateTemplate.save(c);
+		} catch (java.lang.IllegalArgumentException e) {
+		}
 	}
 
 	@Override

@@ -31,7 +31,6 @@ public class Course {
 	private String stuId;
 	private String year;
 	private int xq;
-
 	private Set<ClassBean> classes = new HashSet<ClassBean>();
 
 	@Id

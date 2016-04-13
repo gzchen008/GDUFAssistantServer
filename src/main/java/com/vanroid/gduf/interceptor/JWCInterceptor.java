@@ -1,5 +1,6 @@
 package com.vanroid.gduf.interceptor;
 
+import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public class JWCInterceptor extends MethodFilterInterceptor {
 	private Map<String, Object> resultMap;
 
 	@Override
-	protected String doIntercept(ActionInvocation inv) throws Exception {
+	protected String doIntercept(ActionInvocation inv) throws Exception  {
 		// 拦截登录
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		User qtUser = (User) session.getAttribute("qtUser");
@@ -47,10 +48,11 @@ public class JWCInterceptor extends MethodFilterInterceptor {
 			return "error-noBond";
 		} else {
 			CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(session, null);
-			boolean mailRes = false;
+			boolean isLoginSuccess = false;
 			try {
-				mailRes = jwcLoginService.login(httpClient, qtUser.getStuId(), qtUser.getJwcPass());
-			} catch (Exception e) {
+				isLoginSuccess = jwcLoginService.login(httpClient, qtUser.getStuId(), qtUser.getJwcPass());
+			
+			}catch (Exception e) {
 				e.printStackTrace();
 				resultMap = new HashMap<String, Object>();
 				resultMap.put("resultCode", -99);
@@ -58,10 +60,10 @@ public class JWCInterceptor extends MethodFilterInterceptor {
 				ServletActionContext.getRequest().setAttribute("errorResultMap", resultMap);
 				return "error-accessError";
 			}
-			if (!mailRes) {
+			if (!isLoginSuccess) {
 				resultMap = new HashMap<String, Object>();
 				resultMap.put("resultCode", -2);
-				resultMap.put("msg", "教务系统密码不正确");
+				resultMap.put("msg", "教务系统密码不正确或者连接超时");
 				ServletActionContext.getRequest().setAttribute("errorResultMap", resultMap);
 				return "error-noBond";
 			}

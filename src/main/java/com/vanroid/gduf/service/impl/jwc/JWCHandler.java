@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 
 import com.vanroid.gduf.common.GdufLinks;
 import com.vanroid.gduf.dto.JwcInfo;
@@ -104,23 +105,23 @@ public class JWCHandler {
 
 		String v = getViewState(xh, url);
 
-		String tjUrl = "http://jwc.gduf.edu.cn/(1kr3xaag1lzthj45feqise55)/tjkbcx.aspx?xh="
+		String tjUrl = "http://jwc.gduf.edu.cn/(1kr3xaag1lzthj45feqise55)/xskbcx.aspx?xh="
 				+ xh
 				+ "&xm="
 				+ URLEncoder.encode(xm, "utf-8")
 				+ "&gnmkdm=N121601";
 		// TODO 此处需要修改，如果当前学年，显示专业推荐课表，否则显示个人课表
-		
+
 		String code;
 		List<ClassBean> list;
-		if (year.equals("2015-2016")) {
+
+		if (year.equals("2015-2016") && xq == 2) 
 			code = getTuiJianCourseCode(xh, tjUrl, v);
-			list = coursehtmlHandler.execute(code);
-		} else {
+		else 
 			code = getCourseCode(xh, url, v, year, xq);
 			list = coursehtmlHandler.execute(code);
-		}
-		if(list==null)
+		
+		if (list == null)
 			return null;
 		Set<ClassBean> set = new HashSet<ClassBean>(list);
 		course.setClasses(set);
@@ -154,6 +155,7 @@ public class JWCHandler {
 		try {
 			code = HttpClientUtils.get(httpClient, url, headers, null)
 					.getBody();
+			System.out.println("code--------------:" + code);
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -179,9 +181,9 @@ public class JWCHandler {
 				+ "&gnmkdm=N121605";
 
 		String v = getViewState(xh, gradeurl);
-		String code = getGradeCode(gradeurl, v, xh,year, xq);
+		String code = getGradeCode(gradeurl, v, xh, year, xq);
 		List<Subject> list = gradehtmlHandler.execute(code);
-		if(list.size()==0)
+		if (list.size() == 0)
 			return null;
 		Set<Subject> set = new HashSet<Subject>(list);
 		grade.setSubjects(set);
@@ -191,8 +193,8 @@ public class JWCHandler {
 	/**
 	 * 获取成绩单的数据源码
 	 */
-	private String getGradeCode(String url, String v, String xh,String year, int xq)
-			throws ClientProtocolException, IOException {
+	private String getGradeCode(String url, String v, String xh, String year,
+			int xq) throws ClientProtocolException, IOException {
 		String referer = "http://jwc.gduf.edu.cn/(1kr3xaag1lzthj45feqise55)/xs_main.aspx?xh="
 				+ xh;
 		String code = null;
@@ -213,7 +215,8 @@ public class JWCHandler {
 		headers.put("Content-Type", "application/x-www-form-urlencoded");
 		headers.put("Host", "jwc.gduf.edu.cn");
 		headers.put("Referer", referer);
-		code = HttpClientUtils.post(httpClient, url, headers, params, "utf-8").getBody();
+		code = HttpClientUtils.post(httpClient, url, headers, params, "utf-8")
+				.getBody();
 		return code;
 
 	}
@@ -237,30 +240,9 @@ public class JWCHandler {
 				.getBody();
 		String __VIEWSTATE = htmlhandler.getVIEWSTATE(code);
 		return __VIEWSTATE;
-		// HttpGet httpRequest = HttpHandler.getHttpGet(url);
-		// httpRequest.setHeader("referer", referer);
-		// httpRequest.setHeader("Host", "jwc.gduf.edu.cn");
-		// httpRequest
-		// .setHeader("User-Agent",
-		// "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0)");
-		// httpRequest.setHeader("Connection", "Keep-Alive");
-		// httpRequest.setHeader("Accept-Language", "zh-Hans-CN,zh-Hans;q=0.5");
-		// httpRequest.setHeader("Accept-Encoding", "gzip, deflate");
-		// httpRequest
-		// .setHeader("Accept", "text/html, application/xhtml+xml, */*");
-		// HttpResponse httpResponse2;
-		//
-		// String code = null;
-		// httpResponse2 = new HttpHandler().getResponse(httpRequest);
-		// code = HttpHandler.getResultString(httpResponse2);
-		// String __VIEWSTATE = null;
-		// __VIEWSTATE = htmlHandler.getVIEWSTATE(code);
-		// // System.out.println("__VIEWSTATE2:" + __VIEWSTATE);
-		// // httpRequest.releaseConnection();
 
 	}
 
-	//
 	// // 获取不同学期的课程表
 	public String getCourseCode(String xh, String url, String __VIEWSTATE,
 			String year, int xq) throws ClientProtocolException, IOException {
@@ -305,9 +287,14 @@ public class JWCHandler {
 		headers.put("Content-Type", "application/x-www-form-urlencoded");
 		headers.put("Host", "jwc.gduf.edu.cn");
 		headers.put("Referer", referer);
-
+		/*
+		 * if ("2015-2016".equals(year) && xq == 2) { code =
+		 * HttpClientUtils.get(httpClient, url, headers, params) .getBody();
+		 * }else
+		 */
 		code = HttpClientUtils.post(httpClient, url, headers, params, "utf-8")
 				.getBody();
+
 		return code;
 
 	}

@@ -55,6 +55,7 @@ public class CourseServiceImpl implements CourseService {
 				@Override
 				public void run() {
 					// TODO 自动生成的方法存根
+					if(couser2!=null)
 					courseDao.add(couser2);
 					System.out.println("-------已存入数据库-------");
 				}
