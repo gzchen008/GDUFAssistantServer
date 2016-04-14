@@ -24,7 +24,7 @@
 				
 	</c:if>
 			<div class="imagetext">
-				<img class="other" src="../img/img1.jpg">
+				<img class="other" src="../img/head/<%=new java.util.Random().nextInt(11)%>.png">
 				${notifaction.sender.stuId }&nbsp回复您： ${notifaction.mes}
 			<!-- 回复框  -->
 		<input id="ccont${notifaction.tid.tid}" type="text" class="form-control input"

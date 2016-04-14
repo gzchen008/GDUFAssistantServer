@@ -14,19 +14,22 @@
 <body>
 	<!--导航条-->
 	<ul class=" nav nav-pills title">
-		<li role="presentation"><a href="javaScript:void(0);">返回</a></li>
+	
+		<li role="presentation"><a href="javascript:windows.close();">返回</a></li>
 		<li role="presentation" class="active"><a href="${pageContext.request.contextPath}/circle/addCirclePage">添加</a></li>
 	</ul>
 	<!--右上角头像-->
 	<div class="mediv">
+	
 	<a href="queryMyNotifaction.action?myId=${sessionScope.myId}">
-		<img id="me" src="${pageContext.request.contextPath}/img/img1.jpg"></a>
+		<img id="me" src="${pageContext.request.contextPath}/img/head/<%=new java.util.Random().nextInt(11)%>.png"></a>
 	</div>
 	<c:forEach items="${sessionScope.circles}" var="circle">
 		<div class="content">
 			<!--头像和文字-->
+			
 			<div class="imagetext">
-				<img class="other" src="${pageContext.request.contextPath}/img/img1.jpg">
+				<img class="other" src="${pageContext.request.contextPath}/img/head/<%=new java.util.Random().nextInt(11)%>.png">
 
 
 				${circle.sender.stuId}<br> ${circle.content}
@@ -94,6 +97,7 @@
 
 </body>
 <script>
+
 	var currentNum = 0;
 	var j = jQuery;
 	/* 异步请求，添加评论 */
