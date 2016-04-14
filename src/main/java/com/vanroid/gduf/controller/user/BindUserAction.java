@@ -1,5 +1,6 @@
 package com.vanroid.gduf.controller.user;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.struts2.interceptor.ServletRequestAware;
@@ -89,25 +91,32 @@ public class BindUserAction extends ActionSupport implements ServletRequestAware
 		JwcInfo jwcInfo = new JwcInfo();
 		jwcInfo.setXh(userForm.getStuId());
 		jwcInfo.setPassword(userForm.getJwcPass());
-		String jwcRes = jwcLoginService.login(httpClient, jwcInfo);
-		resultMap = new HashMap<String, Object>();
-		if (jwcRes == null || jwcRes.equals("")) {
-			resultMap.put("msg", "教务系统密码错误！");
-			resultMap.put("resultCode", -1);
-		} else {
-			resultMap.put("msg", "教务系统帐户验证成功！");
-			resultMap.put("resultCode", 0);
-			// 获取用户信息
-			User userInfo = new JWCHandler(httpClient).getUserInfo(jwcInfo.getXh(), jwcRes);
-			qtUser.setClassId(userInfo.getClassId());
-			qtUser.setSex(userInfo.getSex());
-			qtUser.setDepart(userInfo.getDepart());
-			qtUser.setMarjor(userInfo.getMarjor());
-			qtUser.setStuId(userForm.getStuId());
-			qtUser.setJwcPass(userForm.getJwcPass());
-			qtUser.setRealName(userInfo.getRealName());
-			qtUser.setStatus(1); // 已绑定
-			userService.update(qtUser);
+		String jwcRes;
+		try {
+			jwcRes = jwcLoginService.login(httpClient, jwcInfo);
+
+			resultMap = new HashMap<String, Object>();
+			if (jwcRes == null || jwcRes.equals("")) {
+				resultMap.put("msg", "教务系统密码错误！");
+				resultMap.put("resultCode", -1);
+			} else {
+				resultMap.put("msg", "教务系统帐户验证成功！");
+				resultMap.put("resultCode", 0);
+				// 获取用户信息
+				User userInfo = new JWCHandler(httpClient).getUserInfo(jwcInfo.getXh(), jwcRes);
+				qtUser.setClassId(userInfo.getClassId());
+				qtUser.setSex(userInfo.getSex());
+				qtUser.setDepart(userInfo.getDepart());
+				qtUser.setMarjor(userInfo.getMarjor());
+				qtUser.setStuId(userForm.getStuId());
+				qtUser.setJwcPass(userForm.getJwcPass());
+				qtUser.setRealName(userInfo.getRealName());
+				qtUser.setStatus(1); // 已绑定
+				userService.update(qtUser);
+			}
+		} catch (Exception e) {
+			resultMap.put("msg", "学校系统错误！");
+			resultMap.put("resultCode", -2);
 		}
 		return SUCCESS;
 	}

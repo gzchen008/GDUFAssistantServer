@@ -61,5 +61,6 @@
 	<include file="struts_jwc.xml" />
 	<include file="struts_library.xml" />
 	<include file="struts_club.xml" />
+	<include file="struts_circle.xml" />
 	<include file="struts_error.xml" />
 </struts>
