@@ -188,7 +188,7 @@
 
 
 	<build>
-		<finalName>GdufAssistantServer</finalName>
+		<finalName>GDUFAssistant</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

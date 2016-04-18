@@ -79,7 +79,7 @@ public class CourseHtmlHandler extends SuperHtmlHandler {
 		}
 		if (isDoubleWeek) { // 仅双周
 			// 参数表示双周
-			handlerSingleWeek(1, data);
+			handlerSingleWeek(2, data);
 			return;
 
 		}
