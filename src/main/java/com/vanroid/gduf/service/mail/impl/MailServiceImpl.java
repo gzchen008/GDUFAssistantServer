@@ -128,7 +128,7 @@ public class MailServiceImpl implements MailService {
 
 			if (HttpUtil.isOK(httpResponse)) {
 				String content = HttpUtil.getResultString(httpResponse);
-				content = new String(content.getBytes("gb2312"));
+				//content = new String(content.getBytes("gb2312"));
 				// 获取邮件内容
 				mail.setContent(content);
 				// 获取邮件附件地址
