@@ -51,7 +51,6 @@ public class LibrarySearchServiceImpl implements LibrarySearchService {
 	 * @return
 	 */
 	@Override
-	@Transactional
 	public LibrarySearchHistory search(HttpClient httpClient, String keywords,
 			int page) {
 		LibrarySearchHistory librarySearchHistoryInCache = librarySearchDao.search(
@@ -90,7 +89,6 @@ public class LibrarySearchServiceImpl implements LibrarySearchService {
 				// 设置当前页
 				librarySearchHistory.setPage(page);
 				// 存入数据库
-				// 新开线程，为了加快响应速度
 				librarySearchDao.save(librarySearchHistory);
 			}
 		} catch (Exception e) {

@@ -6,7 +6,6 @@
 <struts>
 	<constant name="struts.action.extension" value=",action,do,htm" />
 	<constant name="struts.devMode" value="false" />
-	<!-- <constant name="struts.i18n.encoding" value="GBK"/>   -->
 	<constant name="struts.objectFactory" value="spring"></constant>
 	<constant name="struts.convention.package.locators" value="controller" />
 
