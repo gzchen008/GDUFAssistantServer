@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import javax.annotation.Resource;
 
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -48,14 +49,11 @@ public class LibrarySearchDaoImpl implements LibrarySearchDao {
 
 	@Override
 	public LibrarySearchHistory search(String keywords, int page) {
-		Query query = hibernateTemplate
-				.getSessionFactory()
-				.openSession()
-				.createQuery(
-						"from LibrarySearchHistory as lsh where lsh.keywords ='"
-								+ keywords + "' and lsh.page =" + page);
+		Session session = hibernateTemplate.getSessionFactory().openSession();
+		Query query = session.createQuery(
+				"from LibrarySearchHistory as lsh where lsh.keywords ='" + keywords + "' and lsh.page =" + page);
 		LibrarySearchHistory info = (LibrarySearchHistory) query.uniqueResult();
-
+		session.close();
 		return info;
 	}
 
@@ -73,10 +71,10 @@ public class LibrarySearchDaoImpl implements LibrarySearchDao {
 	public HibernateTemplate getHibernateTemplate() {
 		return hibernateTemplate;
 	}
+
 	@Resource
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
 	}
 
-	
 }
