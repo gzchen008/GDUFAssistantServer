@@ -51,7 +51,7 @@ public class CircleMes {
 		this.sender = sender;
 	}
 
-	@ManyToOne(targetEntity = User.class,cascade=CascadeType.DETACH)
+	@ManyToOne(targetEntity = User.class, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "receiver")
 	public User getRecevier() {
 		return recevier;

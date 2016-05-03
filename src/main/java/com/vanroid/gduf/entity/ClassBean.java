@@ -91,12 +91,12 @@ public class ClassBean {
 	public void setWhichweek(int whichweek) {
 		this.whichweek = whichweek;
 	}
-	@ManyToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
-	@JoinColumn(name="cid",insertable = false, updatable = false)
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "cid", insertable = false, updatable = false)
 	public Course getCourse() {
 		return course;
 	}
-	
 
 	public void setCourse(Course course) {
 		this.course = course;

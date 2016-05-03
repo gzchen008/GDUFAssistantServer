@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "gd_circleimg")
-public class ImagePath implements Serializable{
+public class ImagePath implements Serializable {
 	private int pid;
 	private Circle tid;// 对应哪条朋友圈
 	private String path;// 该条朋友圈下的某张图片路径
@@ -29,7 +29,8 @@ public class ImagePath implements Serializable{
 	public void setPid(int pid) {
 		this.pid = pid;
 	}
-	@Column(name="ImagePath")
+
+	@Column(name = "ImagePath")
 	public String getPath() {
 		return path;
 	}

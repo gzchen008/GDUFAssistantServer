@@ -12,28 +12,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
 /**
  * 
-* @ClassName Grade.java Create on 2015年8月29日     
-*      
-* @company Copyright (c) 2015 by Vanroid Team      
-*      
-* @author Jerry 983951558@qq.com  
-*  
-* @Description:   成绩表对应的实体类
-*
-* @version 1.0
+ * @ClassName Grade.java Create on 2015年8月29日
+ * 
+ * @company Copyright (c) 2015 by Vanroid Team
+ * 
+ * @author Jerry 983951558@qq.com
+ * 
+ * @Description: 成绩表对应的实体类
+ * 
+ * @version 1.0
  */
 @Entity
-@Table(name="gd_grade")
+@Table(name = "gd_grade")
 public class Grade {
 	private int gid;
 	private String stuId;
 	private String year;
 	private int xq;
-	Set<Subject> subjects=new HashSet<Subject>();
-	
-	@ManyToMany(cascade = CascadeType.ALL ,fetch=FetchType.EAGER)
+	Set<Subject> subjects = new HashSet<Subject>();
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "gd_grade_middle", joinColumns = @JoinColumn(name = "gid"), inverseJoinColumns = @JoinColumn(name = "sid"))
 	public Set<Subject> getSubjects() {
 		return subjects;
@@ -83,6 +84,7 @@ public class Grade {
 	public void setXq(int xq) {
 		this.xq = xq;
 	}
+
 	public Grade() {
 		// TODO 自动生成的构造函数存根
 	}

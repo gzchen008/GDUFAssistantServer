@@ -33,36 +33,35 @@ public class BookInfo {
 	/**
 	 * 作者
 	 */
-	private String author; 
+	private String author;
 	/**
 	 * 出版社
 	 */
 	private String press;
 	/**
-	 *  出版时间
+	 * 出版时间
 	 */
-	private String pressDate; 
+	private String pressDate;
 	/**
 	 * 索取号
 	 */
-	private String number; 
+	private String number;
 	/**
 	 * 馆藏号
 	 */
-	private int dpt; 
+	private int dpt;
 	/**
-	 *  可借数
+	 * 可借数
 	 */
-	private int borrowableCount; 
+	private int borrowableCount;
 	/**
-	 *  详细链接
+	 * 详细链接
 	 */
 	private String href;
 	/**
-	 *  书的序号
+	 * 书的序号
 	 */
 	private int sortId;
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -146,7 +145,6 @@ public class BookInfo {
 		this.sortId = sortId;
 	}
 
-
 	public BookInfo(int sortId, String title, String author, String press,
 			String pressDate, String href) {
 		super();
@@ -168,7 +166,7 @@ public class BookInfo {
 				+ author + ", press=" + press + ", pressDate=" + pressDate
 				+ ", number=" + number + ", dpt=" + dpt + ", borrowableCount="
 				+ borrowableCount + ", href=" + href + ", sortId=" + sortId
-				+  "]";
+				+ "]";
 	}
 
 }

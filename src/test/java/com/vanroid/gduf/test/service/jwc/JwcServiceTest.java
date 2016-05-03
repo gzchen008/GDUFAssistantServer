@@ -15,21 +15,21 @@ import com.vanroid.gduf.service.impl.jwc.JwcLoginService;
 import com.vanroid.gduf.util.HttpClientUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:applicationContext.xml")
+@ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class JwcServiceTest {
-	@Resource(name="loginService")
+	@Resource(name = "loginService")
 	private JwcLoginService jwcLoginService;
+
 	@Test
-	public void testLogin(){
-		JwcInfo jwcInfo = new JwcInfo();
+	public void testLogin() {
+		/*JwcInfo jwcInfo = new JwcInfo();
 		jwcInfo.setXh("131545251");
 		jwcInfo.setPassword("fy18098135003@");
 		HttpClient client = HttpClientUtils.createDefaultHttpClient(null);
-		String jwcRes = jwcLoginService.login(client,jwcInfo);
+		String jwcRes = jwcLoginService.login(client, jwcInfo);
 		JWCHandler handler = new JWCHandler(client);
 		User user = handler.getUserInfo(jwcInfo.getXh(), jwcRes);
-		System.out.println(user);
+		System.out.println(user);*/
 	}
-	
-	
+
 }

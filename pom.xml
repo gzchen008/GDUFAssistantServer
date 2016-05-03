@@ -188,7 +188,7 @@
 
 
 	<build>
-		<finalName>GDUFAssistant</finalName>
+		<finalName>GdufAssistantServer</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -206,9 +206,9 @@
 				<version>2.1</version>
 				<configuration>
 					<port>8080</port>
-					<path>/GDUFAssistant</path>
+					<path>/GdufAssistantServer</path>
 					<uriEncoding>UTF-8</uriEncoding>
-					<finalName>GDUFAssistantServer</finalName>
+					<finalName>GdufAssistantServer</finalName>
 					<server>tomcat7</server>
 				</configuration>
 			</plugin>

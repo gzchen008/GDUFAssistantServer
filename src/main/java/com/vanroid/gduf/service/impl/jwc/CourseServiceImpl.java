@@ -34,13 +34,13 @@ public class CourseServiceImpl implements CourseService {
 	/**
 	 * 先查询数据库中是否含有该课程信息，如果没有再到网上获取，获取后再存入数据库 该传入参数的course必须传入年份、学期、学号！
 	 */
-	public Course getCourseInfo(HttpSession session,Course course, String xm) {
+	public Course getCourseInfo(HttpSession session, Course course, String xm) {
 		// TODO 自动生成的方法存根
 		CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(session,
 				new BasicCookieStore());
-		JWCHandler handler=new JWCHandler(httpClient);
-		Course backCourse=queryExistInDb(course);
-		if ( backCourse!= null) {
+		JWCHandler handler = new JWCHandler(httpClient);
+		Course backCourse = queryExistInDb(course);
+		if (backCourse != null) {
 			System.out.println("-------从缓存中获取---------");
 			return backCourse;
 		}
@@ -55,8 +55,8 @@ public class CourseServiceImpl implements CourseService {
 				@Override
 				public void run() {
 					// TODO 自动生成的方法存根
-					if(couser2!=null)
-					courseDao.add(couser2);
+					if (couser2 != null)
+						courseDao.add(couser2);
 					System.out.println("-------已存入数据库-------");
 				}
 			}).start();
@@ -105,6 +105,5 @@ public class CourseServiceImpl implements CourseService {
 		Course course = courseDao.queryExistInDb(c);
 		return course;
 	}
-
 
 }

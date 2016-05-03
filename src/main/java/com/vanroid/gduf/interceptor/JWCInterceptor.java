@@ -36,40 +36,47 @@ public class JWCInterceptor extends MethodFilterInterceptor {
 	private Map<String, Object> resultMap;
 
 	@Override
-	protected String doIntercept(ActionInvocation inv) throws Exception  {
+	protected String doIntercept(ActionInvocation inv) throws Exception {
 		// 拦截登录
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		User qtUser = (User) session.getAttribute("qtUser");
-		if (StringUtils.isEmpty(qtUser.getStuId()) || StringUtils.isEmpty(qtUser.getJwcPass())) {
+		if (StringUtils.isEmpty(qtUser.getStuId())
+				|| StringUtils.isEmpty(qtUser.getJwcPass())) {
 			resultMap = new HashMap<String, Object>();
 			resultMap.put("resultCode", -1);
 			resultMap.put("msg", "未绑定教务系统");
-			ServletActionContext.getRequest().setAttribute("errorResultMap", resultMap);
+			ServletActionContext.getRequest().setAttribute("errorResultMap",
+					resultMap);
 			return "error-noBond";
 		} else {
-			CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(session, null);
+			CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(
+					session, null);
 			boolean isLoginSuccess = false;
 			try {
-				isLoginSuccess = jwcLoginService.login(httpClient, qtUser.getStuId(), qtUser.getJwcPass());
-			
-			}catch (Exception e) {
+				isLoginSuccess = jwcLoginService.login(httpClient,
+						qtUser.getStuId(), qtUser.getJwcPass());
+
+			} catch (Exception e) {
 				e.printStackTrace();
 				resultMap = new HashMap<String, Object>();
 				resultMap.put("resultCode", -99);
 				resultMap.put("msg", "教务系统无法访问");
-				ServletActionContext.getRequest().setAttribute("errorResultMap", resultMap);
+				ServletActionContext.getRequest().setAttribute(
+						"errorResultMap", resultMap);
 				return "error-accessError";
 			}
 			if (!isLoginSuccess) {
 				resultMap = new HashMap<String, Object>();
 				resultMap.put("resultCode", -2);
 				resultMap.put("msg", "教务系统密码不正确或者连接超时");
-				ServletActionContext.getRequest().setAttribute("errorResultMap", resultMap);
+				ServletActionContext.getRequest().setAttribute(
+						"errorResultMap", resultMap);
 				return "error-noBond";
 			}
 		}
 		return inv.invoke();
 	}
+
 	public void setJwcLoginService(JwcLoginService jwcLoginService) {
 		this.jwcLoginService = jwcLoginService;
 	}

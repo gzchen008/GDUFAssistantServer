@@ -31,7 +31,8 @@ import freemarker.template.utility.StringUtil;
 public class JwcLoginService {
 
 	public String login(HttpSession session, JwcInfo info) {
-		CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(session, new BasicCookieStore());
+		CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(session,
+				new BasicCookieStore());
 		JWCHandler handler = new JWCHandler(httpClient);
 		String xm = null;
 		// TODO 自动生成的构造函数存根
@@ -48,7 +49,8 @@ public class JwcLoginService {
 
 	}
 
-	public String login(HttpClient httpClient, JwcInfo info) throws ClientProtocolException, IOException {
+	public String login(HttpClient httpClient, JwcInfo info)
+			throws ClientProtocolException, IOException {
 
 		JWCHandler handler = new JWCHandler(httpClient);
 		String xm = null;

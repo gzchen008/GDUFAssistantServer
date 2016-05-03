@@ -20,7 +20,7 @@ import com.vanroid.gduf.util.HttpClientUtils;
  * 读邮件控制器
  * 
  * @author CGZ
- *
+ * 
  */
 @Controller("ReadMailAction")
 @Scope("prototype")

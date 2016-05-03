@@ -25,18 +25,19 @@ public class BookBorrowedHTML {
 		BookBorrowedInfo bookBorrowedInfo;
 		List<BookBorrowedInfo> list = new ArrayList<BookBorrowedInfo>();
 		for (Element tr : trs) {
-			
+
 			bookBorrowedInfo = new BookBorrowedInfo();
-			//遍历每列
+			// 遍历每列
 			Elements tds = tr.select("td");
-			if(tds.size()!=7)		//最后一行只有两列
+			if (tds.size() != 7) // 最后一行只有两列
 				break;
-			if("续满".equals(tds.get(0).text().trim())){//续满
+			if ("续满".equals(tds.get(0).text().trim())) {// 续满
 				bookBorrowedInfo.setReNew("续满");
-			}else{			//设置为input的name属性
-				bookBorrowedInfo.setReNew(tds.get(0).select("input").attr("name"));
+			} else { // 设置为input的name属性
+				bookBorrowedInfo.setReNew(tds.get(0).select("input")
+						.attr("name"));
 			}
-			
+
 			bookBorrowedInfo.setDeathDate(tds.get(1).text());
 			bookBorrowedInfo.setTitle(tds.get(2).text());
 			bookBorrowedInfo.setBookType(tds.get(4).text());
@@ -48,5 +49,4 @@ public class BookBorrowedHTML {
 
 	}
 
-	
 }
