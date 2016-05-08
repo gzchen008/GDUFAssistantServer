@@ -5,6 +5,12 @@
 <head lang="en">
 <meta charset="UTF-8">
 <title>广金圈</title>
+<style type="text/css">
+.cir-content{
+	margin: 3px;
+	padding-top: 3px;
+}
+</style>
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/circle.css" type="text/css">
@@ -16,32 +22,29 @@
 	<ul class=" nav nav-pills title">
 	
 		<li role="presentation"><a href="javascript:windows.close();">返回</a></li>
-		<li role="presentation" class="active"><a href="${pageContext.request.contextPath}/circle/addCirclePage">添加</a></li>
+		<li role="presentation" class="active"><a href="${pageContext.request.contextPath}/circle/addCirclePage.action">添加</a></li>
 	</ul>
 	<!--右上角头像-->
 	<div class="mediv">
 	
 	<a href="queryMyNotifaction.action?myId=${sessionScope.myId}">
-		<img id="me" src="${pageContext.request.contextPath}/img/head/<%=new java.util.Random().nextInt(11)%>.png"></a>
+		<img id="me" src="${pageContext.request.contextPath}/img/head/notation.jpg"></a>
 	</div>
 	<c:forEach items="${sessionScope.circles}" var="circle">
 		<div class="content">
 			<!--头像和文字-->
-			
 			<div class="imagetext">
 				<img class="other" src="${pageContext.request.contextPath}/img/head/<%=new java.util.Random().nextInt(11)%>.png">
-
-
-				${circle.sender.stuId}<br> ${circle.content}
+				<span style="color:#8DB6CD;">${circle.sender.realName}</span>
+				<span>(${circle.sender.stuId})</span>
+			</div>
+			<div class="cir-content">				
+					${circle.content}
 			</div>
 			<!--照片-->
-			
-			
-			
 			<c:if test="${!empty circle.images }">
 				<c:forEach items="${circle.images}" var="image">
-					
-						<a href="${pageContext.request.contextPath}/picture/${image.path}" class="apic"> <img
+						<a href="pictureView.action?picture=${pageContext.request.contextPath}/picture/${image.path}" class="apic"> <img
 							src="${pageContext.request.contextPath}/picture/${image.path}" border="0" class="rounded-half" /></a>
 							<!-- <img src="${pageContext.request.contextPath}/img/shadow.jpg" border="0" class="shadow" /> -->
 					
