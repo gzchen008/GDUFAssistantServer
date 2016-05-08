@@ -35,8 +35,8 @@ public class CircleAction extends ActionSupport implements ModelDriven<Circle> {
 	private Circle circle = new Circle();
 	private String[] imgCode;// 前台传过来的图片base64码
 	private List<File> img;// 上传的图片
-	
-	public String addCirclePage(){
+
+	public String addCirclePage() {
 		return Action.SUCCESS;
 	}
 
@@ -47,10 +47,9 @@ public class CircleAction extends ActionSupport implements ModelDriven<Circle> {
 	 * @throws IOException
 	 */
 	public String addCircle() throws IOException {
-		System.out.println("进入方法中……");
 		String path = ServletActionContext.getServletContext().getRealPath("/")
-				+ "picture";
-		System.out.println("path" + path);
+		 + "/picture";
+		System.out.println("path:" + path);
 
 		System.out.println("sender:" + circle.getSender().getId());
 		if (img != null) {
@@ -81,7 +80,7 @@ public class CircleAction extends ActionSupport implements ModelDriven<Circle> {
 	 * @return
 	 */
 	public String queryCircles() {
-		//首页需要设置id和stuId
+		// 首页需要设置id和stuId
 		if (listnum == 0) {
 			User user = (User) ServletActionContext.getRequest().getSession()
 					.getAttribute("qtUser");

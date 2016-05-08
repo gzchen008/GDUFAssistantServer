@@ -33,9 +33,6 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 @Table(name = "gd_circle")
 public class Circle implements Serializable {
-	/**
-	 * 
-	 */
 	private int tid;
 	private User sender;
 	private Date createTime;
