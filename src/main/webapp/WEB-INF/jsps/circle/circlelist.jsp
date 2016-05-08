@@ -32,7 +32,9 @@
 				<img class="other" src="${pageContext.request.contextPath}/img/head/<%=new java.util.Random().nextInt(11)%>.png">
 
 
-				${circle.sender.stuId}<br> ${circle.content}
+				${circle.sender.stuId}<br>
+				${circle.sender.realName}<br>
+				 ${circle.content}
 			</div>
 			<!--照片-->
 			
