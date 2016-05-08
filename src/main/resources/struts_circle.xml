@@ -48,5 +48,8 @@
 			<result name="success">/WEB-INF/jsps/circle/meslist.jsp
 			</result>
 		</action>
+		<action name="pictureView" class="circleAction" method="pictureView">
+			<result name="success">/WEB-INF/jsps/circle/picture.jsp</result>
+		</action>
 	</package>
 </struts>

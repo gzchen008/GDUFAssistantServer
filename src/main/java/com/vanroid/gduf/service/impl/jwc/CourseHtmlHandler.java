@@ -106,7 +106,11 @@ public class CourseHtmlHandler extends SuperHtmlHandler {
 		ClassBean c = new ClassBean();
 		c.setWhichweek(whichWeek); // 设置周标志
 		c.setTitle(data[0]);
+		if (getWhichDay(data[1]) <=0)
+			return;
 		c.setWhichday(getWhichDay(data[1]));
+		if (getWhen_howLong(data[1]) <0)
+			return;
 		c.setCwhen(getWhen_howLong(data[1]));
 		c.setHowlong(howLong);
 		if (data.length > 3)
@@ -134,8 +138,7 @@ public class CourseHtmlHandler extends SuperHtmlHandler {
 		if (data.length() == 0)
 			return 0;
 		String whichDay = data.substring(0, 2);
-		if ("周日".equals(whichDay))
-			return 0;
+		
 		if ("周一".equals(whichDay))
 			return 1;
 		if ("周二".equals(whichDay))
@@ -148,6 +151,8 @@ public class CourseHtmlHandler extends SuperHtmlHandler {
 			return 5;
 		if ("周六".equals(whichDay))
 			return 6;
+		if ("周日".equals(whichDay))
+			return 7;
 		return -1;
 	}
 

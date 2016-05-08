@@ -35,6 +35,7 @@ public class CircleAction extends ActionSupport implements ModelDriven<Circle> {
 	private Circle circle = new Circle();
 	private String[] imgCode;// 前台传过来的图片base64码
 	private List<File> img;// 上传的图片
+	private String picture; //图片地址
 
 	public String addCirclePage() {
 		return Action.SUCCESS;
@@ -88,6 +89,8 @@ public class CircleAction extends ActionSupport implements ModelDriven<Circle> {
 					.setAttribute("myId", user.getId());
 			ServletActionContext.getRequest().getSession()
 					.setAttribute("myStuId", user.getStuId());
+			ServletActionContext.getRequest().getSession()
+			.setAttribute("myRealName", user.getRealName());
 		}
 		List<Circle> circleList = circleService.queryCircles(listnum, 10);
 		ServletActionContext.getRequest().getSession()
@@ -96,6 +99,11 @@ public class CircleAction extends ActionSupport implements ModelDriven<Circle> {
 		return Action.SUCCESS;
 	}
 
+	public String pictureView(){
+		ServletActionContext.getRequest().setAttribute("picture", picture);
+		return Action.SUCCESS;
+	}
+	
 	public CircleService getCircleService() {
 		return circleService;
 	}
@@ -166,4 +174,13 @@ public class CircleAction extends ActionSupport implements ModelDriven<Circle> {
 	public void setResultMap(Map<String, Object> resultMap) {
 		this.resultMap = resultMap;
 	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	
 }
