@@ -1,6 +1,5 @@
 package com.vanroid.gduf.controller.error;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
@@ -20,6 +19,10 @@ import com.opensymphony.xwork2.ActionSupport;
 @Controller("ErrorAction")
 @Scope("prototype")
 public class ErrorAction extends ActionSupport {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Map<String, Object> resultMap;
 
 	/**

@@ -13,6 +13,11 @@ package com.vanroid.gduf.exception;
  * @version 1.0
  */
 public class ValidateErrorException extends RuntimeException {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ValidateErrorException(String name) {
 		super(name);
 	}

@@ -46,7 +46,7 @@ public class CourseHtmlHandler extends SuperHtmlHandler {
 			tdEles = trEle.get(i).select("td[align=Center]"); // 提取当前行的列
 			for (Element tdUnit : tdEles)
 				// 提取每一个单元格
-				if (!tdUnit.text().contains("调"))//删除被调的课程，即无效的课程
+				if (!tdUnit.text().contains("调"))// 删除被调的课程，即无效的课程
 					getCoureseModel(tdUnit); // 处理每一个单元格
 
 		}

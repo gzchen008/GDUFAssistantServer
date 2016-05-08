@@ -32,6 +32,10 @@ import com.vanroid.gduf.util.HttpClientUtils;
 @Scope("prototype")
 public class MyLibraryAction extends ActionSupport {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * 我的图书馆服务
 	 */
 	@Resource

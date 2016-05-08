@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.util.StringUtils;
 
@@ -16,7 +15,6 @@ import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 import com.vanroid.gduf.entity.LibraryUserInfo;
 import com.vanroid.gduf.entity.User;
-import com.vanroid.gduf.exception.ValidateErrorException;
 import com.vanroid.gduf.service.library.MyLibraryService;
 import com.vanroid.gduf.util.HttpClientUtils;
 
@@ -33,6 +31,10 @@ import com.vanroid.gduf.util.HttpClientUtils;
  * @version 1.0
  */
 public class MyLibraryInterceptor extends MethodFilterInterceptor {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Resource
 	private MyLibraryService myLibraryService;
 	private Map<String, Object> resultMap;

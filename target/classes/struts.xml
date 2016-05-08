@@ -6,14 +6,15 @@
 <struts>
 	<constant name="struts.action.extension" value=",action,do,htm" />
 	<constant name="struts.devMode" value="false" />
-	<!-- <constant name="struts.i18n.encoding" value="GBK"/>   -->
+	<!-- <constant name="struts.i18n.encoding" value="GBK"/> -->
 	<constant name="struts.objectFactory" value="spring"></constant>
 	<constant name="struts.convention.package.locators" value="controller" />
 
 	<!-- 系统默认包，其它子程序继承自此包 -->
 	<package name="default" extends="json-default" namespace="/">
 		<interceptors>
-			<interceptor name="userInterceptor" class="com.vanroid.gduf.interceptor.UserInterceptor">
+			<interceptor name="userInterceptor"
+				class="com.vanroid.gduf.interceptor.UserInterceptor">
 				<param name="excludeMethods">login,register,search</param>
 			</interceptor>
 
@@ -43,12 +44,10 @@
 			</result>
 		</global-results>
 
-		<!-- 全局异常处理 
-		<global-exception-mappings>
-			<exception-mapping result="validateErrorException" exception="com.vanroid.gduf.exception.ValidateErrorException"></exception-mapping>
-		</global-exception-mappings>
-		-->
-		
+		<!-- 全局异常处理 <global-exception-mappings> <exception-mapping result="validateErrorException" 
+			exception="com.vanroid.gduf.exception.ValidateErrorException"></exception-mapping> 
+			</global-exception-mappings> -->
+
 		<action name="index" class="IndexAction">
 			<result type="json">
 				<param name="root">result</param>
@@ -61,7 +60,7 @@
 	<include file="struts_mail.xml" />
 	<include file="struts_jwc.xml" />
 	<include file="struts_library.xml" />
-	<include file="struts_club.xml" />
 	<include file="struts_circle.xml" />
 	<include file="struts_error.xml" />
+	<include file="struts_club.xml" />
 </struts>

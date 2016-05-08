@@ -2,69 +2,76 @@
 <!DOCTYPE struts PUBLIC
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
-
 <struts>
-	<constant name="struts.devMode" value="true" />
-	<package name="club" extends="struts-default,json-default"
-		namespace="/club">
 
+	<!-- 指定允许上传的文件最大字节数,默认值是2097152(2M),使用struts常量扩大默认上传文件大小 -->
+	<constant name="struts.multipart.maxSize" value="104857600"></constant>
+	<package name="commons" abstract="true" extends="struts-default">
+		<interceptors>
+			<interceptor name="authority"
+				class="com.vanroid.gduf.controller.club.AuthInterceptor" />
+			<interceptor-stack name="backgroundStack">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authority" />
+			</interceptor-stack>
+		</interceptors>
+	</package>
+	<package name="admin" extends="commons" namespace="/admin">
+		<!-- 登录页 -->
 		<global-results>
-			<result name="show">/WEB-INF/jsps/show.jsp</result>
-			<result name="error">/WEB-INF/jsps/error.jsp</result>
+			<result name="success">/WEB-INF/jsps/club/index.jsp</result>
+			<result name="input">/WEB-INF/jsps/club/login.jsp</result>
 		</global-results>
-
-		<action name="autoCodeAction" class="com.vanroid.gduf.controller.club.AutoCodeAction"
-			method="execute">
+		<action name="login" class="AdminAction" method="loginPage" />
+		<action name="main" class="AdminAction" method="login">
 		</action>
-
-		<action name="admin_*" class="adminAction" method="{1}">
-			<result name="input">
-				/index.jsp
-			</result>
-			<result name="loginFail">/WEB-INF/jsps/admin/login.jsp</result>
-			<result name="exit">/WEB-INF/jsps/admin/login.jsp</result>
-			<result name="loginIn">/WEB-INF/jsps/background/index.jsp</result>
-			<result name="pwdPage">/WEB-INF/jsps/admin/admin_findpwd.jsp</result>
-			<result name="reset">/WEB-INF/jsps/admin/admin_resetPwd.jsp</result>
-			<result name="success" type="json">
-				<param name="root">list</param>
-			</result>
+		<action name="logout" class="AdminAction" method="logout">
+			<interceptor-ref name="backgroundStack" />
 		</action>
-
-
-
-		<action name="club_*" class="clubAction" method="{1}">
-			<result name="success" type="json">
-				<param name="root">list</param>
+	</package>
+	<package name="club" extends="commons" namespace="/club">
+		<action name="manager" class="ClubAction" method="managerPage">
+			<result name="input" type="redirectAction">
+				<param name="namespace">/admin</param>
+				<param name="actionName">login</param>
 			</result>
-			<result name="registerPage">/WEB-INF/jsps/club/club_register.jsp</result>
-			<result name="activate">/WEB-INF/jsps/club/club_activate.jsp</result>
+			<result name="success">/WEB-INF/jsps/club/club_manager.jsp</result>
+			<interceptor-ref name="backgroundStack" />
 		</action>
-
-
-
-		<action name="clubMessage_*" class="clubMessageAction" method="{1}">
-			<result name="msg_list_android" type="json">
-				<param name="root">list</param>
-			</result>
-			<result name="android">/WEB-INF/jsps/background/club_message_android.jsp
-			</result>
-			<result name="insertPage">/WEB-INF/jsps/background/club_message_insert.jsp
-			</result>
-			<result name="success" type="redirectAction">clubMessage_updateList.action
-			</result>
-			<result name="updateList">/WEB-INF/jsps/background/club_management.jsp
-			</result>
-			<result name="update">/WEB-INF/jsps/background/club_message_update.jsp
-			</result>
-			<result name="check">/WEB-INF/jsps/background/club_message_check.jsp
-			</result>
-			<result name="showMsg">/WEB-INF/jsps/background/club_message_show.jsp
-			</result>
-			<result name="test">/test.jsp</result>
+		<action name="addClub" class="ClubAction" method="addClub">
+			<result name="login" type="redirectAction">manager</result>
+			<result name="success">/WEB-INF/jsps/club/club_add.jsp</result>
+			<interceptor-ref name="backgroundStack" />
 		</action>
+		<action name="updateClub" class="ClubAction" method="updateClub">
+			<result name="input">/WEB-INF/jsps/club/club_update.jsp</result>
+			<result name="success" type="redirectAction">manager.action</result>
+			<interceptor-ref name="backgroundStack" />
+		</action>
+		<action name="delClub" class="ClubAction" method="delClub">
+			<result name="success" type="redirectAction">manager.action</result>
+		</action>
+	</package>
 
-
-
+	<package name="message" extends="commons" namespace="/msg">
+		<!-- <action name="club/add" class="MessageAction" method="addClubMsg"></action> -->
+		<action name="addClubMsg" class="MessageAction" method="addClubMsg">
+			<result name="success">/WEB-INF/jsps/club/msg_add.jsp</result>
+			<result name="login" type="redirectAction">manager.action</result>
+			<interceptor-ref name="backgroundStack" />
+		</action>
+		<action name="list" class="MessageAction" method="clubMsgList">
+			<result name="success">/WEB-INF/jsps/club/msg_list.jsp</result>
+		</action>
+		<action name="clubMsgDetail" class="MessageAction" method="clubMsgDetail">
+			<result name="success">/WEB-INF/jsps/club/msg_detail.jsp</result>
+		</action>
+		<action name="manager" class="MessageAction" method="msgManager">
+			<result name="success">/WEB-INF/jsps/club/msg_manager.jsp</result>
+			<interceptor-ref name="backgroundStack" />
+		</action>
+		<action name="delete" class="MessageAction" method="deletMsg">
+			<result type="redirectAction">manager.action</result>
+		</action>
 	</package>
 </struts>

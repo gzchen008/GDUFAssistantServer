@@ -24,7 +24,7 @@ public static  List<ImagePath> imghanlder(Circle circle,List<File> files,String 
         for (int i = 0; i < files.size(); i++) {
         	String fileName =new SimpleDateFormat("yyyyMMddhhmmssSSS").format(new Date());
         	ImagePath ip=new ImagePath();
-            FileOutputStream fos = new FileOutputStream(path+"\\"+fileName+".jpg");
+            FileOutputStream fos = new FileOutputStream(path+"/"+fileName+".jpg");
             FileInputStream fis = new FileInputStream(files.get(i));
             byte[] buffer = new byte[1024];
             int len = 0;

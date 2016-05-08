@@ -15,17 +15,18 @@ import com.vanroid.gduf.entity.ClassBean;
 import com.vanroid.gduf.entity.Course;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:applicationContext.xml")
+@ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class CourseDaoTest {
 	@Resource
 	private CourseDao courseDao;
+
 	@Test
-	public void testQuery(){
+	public void testQuery() {
 		Course c = new Course();
 		c.setStuId("131545230");
 		c.setXq(1);
 		c.setYear("2015-2016");
-		
+
 		Set<ClassBean> classes = new HashSet<ClassBean>();
 		ClassBean cb = new ClassBean();
 		cb.setTitle("语文");
@@ -36,9 +37,8 @@ public class CourseDaoTest {
 		classes.add(cb);
 		classes.add(cb2);
 		classes.add(cb3);
-		c.setClasses(classes );
-		courseDao.add(c	);
+		c.setClasses(classes);
+		courseDao.add(c);
 	}
-
 
 }

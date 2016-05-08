@@ -40,13 +40,13 @@ public class CircleService {
 	}
 
 	/**
-	 * 删除朋友圈，同时删除所有的点赞和评论 
+	 * 删除朋友圈，同时删除所有的点赞和评论
 	 * 
 	 * @param circle
 	 */
 	public void deleteCircle(int id) {
-		
-		Circle circle=circleDao.deleteCircle(id);
+
+		Circle circle = circleDao.deleteCircle(id);
 	}
 
 	/**
@@ -67,21 +67,25 @@ public class CircleService {
 			circle.setComments(comments);
 
 		}
-		
+
 		return list;
 	}
 
 	/**
 	 * 点赞或者添加评论
-	 * @param tid 对哪一条朋友圈
-	 * @param comment	点赞或者评论的内容，当text字段为空时为点赞
+	 * 
+	 * @param tid
+	 *            对哪一条朋友圈
+	 * @param comment
+	 *            点赞或者评论的内容，当text字段为空时为点赞
 	 */
 	public void addComment(Comment comment) {
-		Circle circle=circleDao.queryById(comment.getTid().getTid());//先查出来再添加评论，防止朋友圈的其他信息被清空
+		Circle circle = circleDao.queryById(comment.getTid().getTid());// 先查出来再添加评论，防止朋友圈的其他信息被清空
 		comment.setTid(circle);
 		commentDao.addComment(comment);
 	}
-	public void deleteComment(int cid){
+
+	public void deleteComment(int cid) {
 		commentDao.deleteComment(cid);
 	}
 
@@ -113,26 +117,32 @@ public class CircleService {
 	public void setCommentDao(CommentDao commentDao) {
 		this.commentDao = commentDao;
 	}
+
 	/**
 	 * 是否已经点赞过了
+	 * 
 	 * @param comment
 	 * @return
 	 */
 	public boolean isSupported(Comment comment) {
 		// TODO 自动生成的方法存根
-		
+
 		return commentDao.isSupported(comment);
 	}
+
 	/**
 	 * 根据已经获得的comment内容获取到其cid
+	 * 
 	 * @param comment
 	 * @return
 	 */
-	public int getCid(Comment comment){
+	public int getCid(Comment comment) {
 		return commentDao.getCid(comment);
 	}
+
 	/**
 	 * 评论和点赞的消息通知
+	 * 
 	 * @param cmes
 	 */
 	public void addNotifaction(CircleMes cmes) {

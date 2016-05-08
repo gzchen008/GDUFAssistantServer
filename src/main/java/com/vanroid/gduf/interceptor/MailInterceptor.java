@@ -29,6 +29,10 @@ import com.vanroid.gduf.util.HttpClientUtils;
  * @version 1.0
  */
 public class MailInterceptor extends MethodFilterInterceptor {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Resource
 	private MailService mailService;
 	private Map<String, Object> resultMap;

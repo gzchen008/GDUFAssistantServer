@@ -10,7 +10,6 @@ import org.apache.struts2.convention.annotation.Result;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -27,6 +26,11 @@ import com.opensymphony.xwork2.ActionSupport;
 @ParentPackage("struts-default")
 @Namespace(value = "/api")
 public class ApiTestAction extends ActionSupport {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 测试页

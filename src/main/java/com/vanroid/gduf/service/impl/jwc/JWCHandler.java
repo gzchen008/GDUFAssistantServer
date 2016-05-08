@@ -2,8 +2,6 @@ package com.vanroid.gduf.service.impl.jwc;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -12,8 +10,6 @@ import java.util.Set;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-
 import com.vanroid.gduf.common.GdufLinks;
 import com.vanroid.gduf.dto.JwcInfo;
 import com.vanroid.gduf.entity.ClassBean;

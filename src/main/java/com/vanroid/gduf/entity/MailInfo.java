@@ -6,7 +6,7 @@ import java.util.List;
  * 邮件类
  * 
  * @author CGZ
- *
+ * 
  */
 
 public class MailInfo {
@@ -39,8 +39,7 @@ public class MailInfo {
 	 */
 	private boolean isAttach;
 	/**
-	 * 附件地址
-	 * 当数组大于1时，表示有多个附件
+	 * 附件地址 当数组大于1时，表示有多个附件
 	 */
 	private List attaches;
 	/**
@@ -57,11 +56,9 @@ public class MailInfo {
 	 */
 	private String content;
 	/**
-	 * 外部链接
-	 * null表示没有
+	 * 外部链接 null表示没有
 	 */
 	private String extraLinks;
-	
 
 	public String getId() {
 		return id;
@@ -110,7 +107,6 @@ public class MailInfo {
 	public void setSize(String size) {
 		this.size = size;
 	}
-	
 
 	public List getAttaches() {
 		return attaches;
@@ -136,8 +132,6 @@ public class MailInfo {
 		this.readFlag = readFlag;
 	}
 
-
-
 	public boolean getIsAttach() {
 		return isAttach;
 	}
@@ -146,7 +140,6 @@ public class MailInfo {
 		this.isAttach = isAttach;
 	}
 
-	
 	public String getContent() {
 		return content;
 	}

@@ -1,58 +1,35 @@
 package com.vanroid.gduf.service.club;
 
 import java.util.List;
+
 import com.vanroid.gduf.entity.Admin;
 import com.vanroid.gduf.entity.Club;
+import com.vanroid.gduf.entity.Message;
 
 public interface ClubService {
-	/**
-	 * 获取所有的社团
-	 * 
-	 * @return List<Club>
-	 */
-	public List<Club> getAllClubs();
 
-	/**
-	 * 给定Id得到对应的Club实例
-	 * 
-	 * @param id
-	 * @return Club
-	 */
-	public Club getClubById(Integer id);
+	public int countClub();
 
-	/**
-	 * 保存注册社团管理员的信息
-	 * 
-	 * @param admin
-	 *            管理员实体
-	 * @param club
-	 *            绑定社团
-	 */
-	public void saveRegiestInfo(Admin admin, Club club, String verifycode);
+	public List<Club> getList(int curPage, int pageSize, int totalRecord);
 
-	/**
-	 * 根据管理员ID查找社团
-	 * 
-	 * @param id
-	 * @return
-	 */
-	public Club findClubByAdminId(Integer id);
+	public void saveMessage(Message message);
 
-	/**
-	 * 更新社团信息
-	 * 
-	 * @param existClub
-	 */
-	public void updateClub(Club existClub);
+	public List<Club> getAllClub();
 
-	/**
-	 * 激活用户所需要的信息
-	 * 
-	 * @param verifycode
-	 *            验证码
-	 * @param club_name
-	 *            社团管理员帐号
-	 * @return
-	 */
-	public String activateClub(String verifycode, String club_name);
+	public void saveClub(Admin admin, String cdescribe, String cName);
+
+	public Club getClubById(int clubId);
+
+	public List<Message> getMessageList(int curPage, int pageSize, String flag);
+
+	public Message getMessageById(int mid);
+
+	public int countClubMessage(String flag);
+
+	public void delMsg(int mid);
+
+	public void delClub(int parseInt);
+
+	public boolean update(Club club);
+
 }

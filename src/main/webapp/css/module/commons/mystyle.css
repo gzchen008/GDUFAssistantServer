@@ -1,0 +1,44 @@
+.title {
+	float: left;
+	padding: 5px;
+	margin: 0 5px;
+	font-size: 16px;
+}
+.options {
+	display: inline;
+	float: right;
+	margin: 0 10px;
+}
+.options a {
+	margin: 3px 1px;
+}
+.calendar label {
+	margin: 5px;
+	padding-top: 2px;
+}
+.calendar span {
+	width: 25px;
+	height: 29px;
+	text-align: center;
+	border: 1px solid #D4D4D4;
+	line-height: 110%;
+	color: #2E6DA4;
+}
+.calendar span.glyphicon {
+	font-size: 20px;
+	position: relative;
+	top: 4px;
+}
+.calendar input[ type =date ] {
+	padding: 1px;
+	height: 29px;
+	margin: 0px;
+	border: 1px solid #D4D4D4;
+}
+.calendar span.calendar-text {
+	position: relative;
+	padding: 5px;
+}
+div.form-group label.control-label {
+	text-align: right;
+}

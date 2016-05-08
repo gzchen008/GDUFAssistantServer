@@ -14,7 +14,7 @@ package com.vanroid.gduf.common;
  */
 public class GdufLinks {
 	public static final String JWC_LOGIN = "http://jwc.gduf.edu.cn/(1kr3xaag1lzthj45feqise55)/default2.aspx";
-	public static final String JWC_USER_INFO="http://jwc.gduf.edu.cn/xsgrxx.aspx";
+	public static final String JWC_USER_INFO = "http://jwc.gduf.edu.cn/xsgrxx.aspx";
 	// 邮件列表地址
 	public static final String MAIL_LIST = "http://www.gduf.edu.cn/mail/mail_list.jsp";
 	public static final String CHECK_USER = "http://www.gduf.edu.cn/checkuser.jsp";

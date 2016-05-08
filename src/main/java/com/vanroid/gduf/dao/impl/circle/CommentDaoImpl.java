@@ -49,7 +49,7 @@ public class CommentDaoImpl implements CommentDao {
 	@Override
 	public void deleteComment(int cid) {
 		// TODO 自动生成的方法存根
-		Comment comment=queryById(cid);
+		Comment comment = queryById(cid);
 		hibernateTemplate.delete(comment);
 	}
 
@@ -73,9 +73,10 @@ public class CommentDaoImpl implements CommentDao {
 	@Override
 	public Comment queryById(int cid) {
 		// TODO 自动生成的方法存根
-		Comment comment=hibernateTemplate.get(Comment.class, cid);
+		Comment comment = hibernateTemplate.get(Comment.class, cid);
 		return comment;
 	}
+
 	/**
 	 * 判断是否已经点赞过了
 	 */
@@ -83,23 +84,27 @@ public class CommentDaoImpl implements CommentDao {
 	@Transactional
 	public boolean isSupported(Comment comment) {
 		// TODO 自动生成的方法存根
-		Session session=sessionFactoy.getCurrentSession();
-		String hql="select count(*) from Comment where tid=? and sender=? and text=?";
-		Query query=session.createQuery(hql).setEntity(0, comment.getTid()).setEntity(1, comment.getSender()).setString(2, "");
-		if(((Long)query.uniqueResult())>0)
+		Session session = sessionFactoy.getCurrentSession();
+		String hql = "select count(*) from Comment where tid=? and sender=? and text=?";
+		Query query = session.createQuery(hql).setEntity(0, comment.getTid())
+				.setEntity(1, comment.getSender()).setString(2, "");
+		if (((Long) query.uniqueResult()) > 0)
 			return true;
 		return false;
 	}
-	
-	//根据内容返回评论的cid
+
+	// 根据内容返回评论的cid
 	@Transactional
 	public int getCid(Comment comment) {
 		// TODO 自动生成的方法存根
-		Session session=sessionFactoy.getCurrentSession();
-		String hql="select cid from Comment where tid=? and sender=? and text=?";
-		Query query=session.createQuery(hql).setEntity(0, comment.getTid()).setEntity(1, comment.getSender()).setString(2, comment.getText());
-		return (Integer)query.uniqueResult();
+		Session session = sessionFactoy.getCurrentSession();
+		String hql = "select cid from Comment where tid=? and sender=? and text=?";
+		Query query = session.createQuery(hql).setEntity(0, comment.getTid())
+				.setEntity(1, comment.getSender())
+				.setString(2, comment.getText());
+		return (Integer) query.uniqueResult();
 	}
+
 	public HibernateTemplate getHibernateTemplate() {
 		return hibernateTemplate;
 	}
@@ -117,7 +122,5 @@ public class CommentDaoImpl implements CommentDao {
 	public void setSessionFactoy(SessionFactory sessionFactoy) {
 		this.sessionFactoy = sessionFactoy;
 	}
-
-	
 
 }

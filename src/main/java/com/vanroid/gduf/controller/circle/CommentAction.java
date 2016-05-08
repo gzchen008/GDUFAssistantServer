@@ -1,6 +1,5 @@
 package com.vanroid.gduf.controller.circle;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +20,10 @@ import com.vanroid.gduf.service.circle.CircleService;
 @Controller("commentAction")
 @Scope("prototype")
 public class CommentAction extends ActionSupport  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	HttpServletResponse response=ServletActionContext.getResponse();
 	private Comment comment = new Comment();
 	Map<String,String> resultMap=new HashMap<String,String>();

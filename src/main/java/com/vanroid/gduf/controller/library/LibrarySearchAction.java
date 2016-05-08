@@ -29,6 +29,10 @@ import com.vanroid.gduf.util.HttpClientUtils;
 @Scope("prototype")
 public class LibrarySearchAction extends ActionSupport {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * 搜索关键字
 	 */
 	private String keywords;

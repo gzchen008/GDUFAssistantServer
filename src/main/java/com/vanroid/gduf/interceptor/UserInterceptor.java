@@ -22,6 +22,11 @@ import com.vanroid.gduf.entity.User;
  */
 public class UserInterceptor extends MethodFilterInterceptor {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected String doIntercept(ActionInvocation inv) throws Exception {
 		ServletActionContext.getRequest().getSession();

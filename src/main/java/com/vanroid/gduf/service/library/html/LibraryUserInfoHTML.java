@@ -8,8 +8,9 @@ import com.vanroid.gduf.entity.LibraryUserInfo;
 
 /**
  * 图书馆用户信息HTML处理器
+ * 
  * @author CGZ
- *
+ * 
  */
 public class LibraryUserInfoHTML {
 	/**
@@ -19,16 +20,17 @@ public class LibraryUserInfoHTML {
 
 	/**
 	 * 
-	 * @param code HTML代码
+	 * @param code
+	 *            HTML代码
 	 * @return 用户信息
 	 */
 	public LibraryUserInfo analysis(String code) {
-		if(code == null)
+		if (code == null)
 			return null;
 		libraryUserInfo = new LibraryUserInfo();
 		Document doc = Jsoup.parse(code);
 		Elements spans = doc.select("span[class=inforight");
-		if(spans.size() == 0)
+		if (spans.size() == 0)
 			return null;
 		libraryUserInfo.setStuId(spans.get(0).text());
 		libraryUserInfo.setName(spans.get(1).text());

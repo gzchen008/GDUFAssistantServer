@@ -32,7 +32,10 @@ import org.hibernate.annotations.FetchMode;
  */
 @Entity
 @Table(name = "gd_circle")
-public class Circle implements Serializable{
+public class Circle implements Serializable {
+	/**
+	 * 
+	 */
 	private int tid;
 	private User sender;
 	private Date createTime;
@@ -51,13 +54,13 @@ public class Circle implements Serializable{
 	}
 
 	@OneToMany(mappedBy = "tid", targetEntity = ImagePath.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SUBSELECT)  
+	@Fetch(FetchMode.SUBSELECT)
 	public List<ImagePath> getImages() {
 		return images;
 	}
 
-	@OneToMany(mappedBy = "tid", targetEntity = Comment.class,cascade=CascadeType.ALL,fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SUBSELECT)  
+	@OneToMany(mappedBy = "tid", targetEntity = Comment.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
 	public List<Comment> getComments() {
 		return comments;
 	}

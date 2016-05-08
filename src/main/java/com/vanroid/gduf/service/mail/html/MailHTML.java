@@ -15,7 +15,7 @@ import com.vanroid.gduf.entity.MailInfo;
  * 处理邮件的HTML
  * 
  * @author CGZ
- *
+ * 
  */
 public class MailHTML {
 
@@ -51,7 +51,8 @@ public class MailHTML {
 			String size = null; // 大小
 			boolean isAttach = false; // 是否有附件
 			String attach = null; // 附件地址
-			//String link = "http://www.gduf.edu.cn/mail/mail_read.jsp?"; // 主内容地址
+			// String link = "http://www.gduf.edu.cn/mail/mail_read.jsp?"; //
+			// 主内容地址
 			String link = null;
 			String id = null; // 邮件ID
 			String senderId = null; // 发件人ID
@@ -73,17 +74,18 @@ public class MailHTML {
 					size = mailTd.text();
 				} else if (i == 10) { // 附件
 					Elements attachEl = mailTd.select("a");
-					/*if (attachEl.size() != 0
-							&& attachEl.attr("href").length() > 4) { // 有附件
-						isAttach = true; // 表示有邮件
-						attach = attachEl.attr("href"); // 附件下载地址
-						// ../downloadFile.jsp?link=mail/annex/2015\04\20/tzsjy2015042008572615&fileName=广东金融学院2014-2015学年第二学期第七周校园招聘安排表
-						// .docx
-						// 去除前面两个点，加上www.gduf.edu.cn
-						attach = GdufLinks.GDUF_EDU_CN + attach.substring(3);
-						attach = attach.replaceAll("\\\\", "/");
-					}*/
-					if(attachEl.size()!=0){	//有附件，可能为单个附件地址，也可能为多个附件，表示为#
+					/*
+					 * if (attachEl.size() != 0 &&
+					 * attachEl.attr("href").length() > 4) { // 有附件 isAttach =
+					 * true; // 表示有邮件 attach = attachEl.attr("href"); // 附件下载地址
+					 * // ../downloadFile.jsp?link=mail/annex/2015\04\20/
+					 * tzsjy2015042008572615
+					 * &fileName=广东金融学院2014-2015学年第二学期第七周校园招聘安排表 // .docx //
+					 * 去除前面两个点，加上www.gduf.edu.cn attach = GdufLinks.GDUF_EDU_CN
+					 * + attach.substring(3); attach = attach.replaceAll("\\\\",
+					 * "/"); }
+					 */
+					if (attachEl.size() != 0) { // 有附件，可能为单个附件地址，也可能为多个附件，表示为#
 						isAttach = true;
 					}
 				}
@@ -100,18 +102,19 @@ public class MailHTML {
 				// 发件人id
 				senderId = elements[7];
 				// 内容链接
-				/*link += "foldertype=" + elements[1] + "&id=" + elements[3]
-						+ "&page=" + elements[5] + "&personId=" + elements[7]
-						+ "&reply=" + elements[9] + "&transmit=" + elements[11]
-						+ "&readFlag=" + elements[15];*/
+				/*
+				 * link += "foldertype=" + elements[1] + "&id=" + elements[3] +
+				 * "&page=" + elements[5] + "&personId=" + elements[7] +
+				 * "&reply=" + elements[9] + "&transmit=" + elements[11] +
+				 * "&readFlag=" + elements[15];
+				 */
 
 			}
 			// 加入模型
-			//这里并没有放入附件地址
+			// 这里并没有放入附件地址
 			MailInfo mailInfo = new MailInfo(id, link, sender, title, date,
 					size, isAttach, null, senderId, readFlag);
 			list.add(mailInfo);
-		
 
 		}
 
@@ -121,33 +124,36 @@ public class MailHTML {
 
 	/**
 	 * 获取邮件
-	 * @param code HTML代码
+	 * 
+	 * @param code
+	 *            HTML代码
 	 */
 	public MailInfo getMail(String code) {
-		
+
 		return null;
-		
+
 	}
 
 	/**
 	 * 获取附件地址
+	 * 
 	 * @param resultStr
 	 * @return
 	 */
 	public List<String> getAttaches(String resultStr) {
-		List<String> attaches; 
+		List<String> attaches;
 		Document doc = Jsoup.parse(resultStr);
 		Elements elTdas = doc.select("td").select("a[target=_blank]");
 		int size = elTdas.size();
-		System.out.println("size:"+size);
-		if(size == 0)
+		System.out.println("size:" + size);
+		if (size == 0)
 			return null;
-		else{
+		else {
 			attaches = new ArrayList<String>();
-			//附件地址
+			// 附件地址
 			String attach;
-			for(Element tda : elTdas){
-				//href属性
+			for (Element tda : elTdas) {
+				// href属性
 				attach = tda.attr("href");
 				attach = GdufLinks.GDUF_EDU_CN + attach.substring(3);
 				attach = attach.replaceAll("\\\\", "/");

@@ -1,6 +1,5 @@
 package com.vanroid.gduf.controller.user;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +32,10 @@ import com.vanroid.gduf.service.user.UserService;
 @Controller("UserAction")
 @Scope("prototype")
 public class UserAction extends ActionSupport implements ModelDriven<User> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final Logger logger = LoggerFactory.getLogger(UserAction.class);
 	/**
 	 * 接收用户表单

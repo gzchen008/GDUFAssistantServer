@@ -14,7 +14,7 @@ import com.vanroid.gduf.entity.BookInfo;
  * 图书馆HTML处理器
  * 
  * @author CGZ
- *
+ * 
  */
 
 public class LibraryHTML {
@@ -83,7 +83,8 @@ public class LibraryHTML {
 				pressDate = element.text();
 
 				// 建立实例
-				list.add(new BookInfo(sortId, title, author, press, pressDate, href));
+				list.add(new BookInfo(sortId, title, author, press, pressDate,
+						href));
 				break;
 			}
 

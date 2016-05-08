@@ -8,63 +8,85 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "gd_admin")
 public class Admin {
-
-	private Integer id;
-	private String admin_name;
-	private String admin_password;
-	private int admin_rank;
-
-	private String admin_validate;
-
-	public Admin() {
-	}
-
-	public Admin(String admin_name, String admin_password, int admin_rank) {
-		this.admin_name = admin_name;
-		this.admin_password = admin_password;
-		this.admin_rank = admin_rank;
-	}
-
 	@Id
 	@GeneratedValue
-	public Integer getId() {
-		return id;
+	private int aid;
+	private String aAccount;
+	private String aPassword;
+	private String aName;
+	private int status;
+	private int aRank;
+	private String aQuestion;
+	private String aAnswer;
+
+	public int getAid() {
+		return aid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setAid(int aid) {
+		this.aid = aid;
 	}
 
-	public String getAdmin_name() {
-		return admin_name;
+	public String getaAccount() {
+		return aAccount;
 	}
 
-	public void setAdmin_name(String admin_name) {
-		this.admin_name = admin_name;
+	public void setaAccount(String aAccount) {
+		this.aAccount = aAccount;
 	}
 
-	public String getAdmin_password() {
-		return admin_password;
+	public String getaPassword() {
+		return aPassword;
 	}
 
-	public void setAdmin_password(String admin_password) {
-		this.admin_password = admin_password;
+	public void setaPassword(String aPassword) {
+		this.aPassword = aPassword;
 	}
 
-	public int getAdmin_rank() {
-		return admin_rank;
+	public String getaName() {
+		return aName;
 	}
 
-	public void setAdmin_rank(int admin_rank) {
-		this.admin_rank = admin_rank;
+	public void setaName(String aName) {
+		this.aName = aName;
 	}
 
-	public String getAdmin_validate() {
-		return admin_validate;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setAdmin_validate(String admin_validate) {
-		this.admin_validate = admin_validate;
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getaRank() {
+		return aRank;
+	}
+
+	public void setaRank(int aRank) {
+		this.aRank = aRank;
+	}
+
+	public String getaQuestion() {
+		return aQuestion;
+	}
+
+	public void setaQuestion(String aQuestion) {
+		this.aQuestion = aQuestion;
+	}
+
+	public String getaAnswer() {
+		return aAnswer;
+	}
+
+	public void setaAnswer(String aAnswer) {
+		this.aAnswer = aAnswer;
+	}
+
+	@Override
+	public String toString() {
+		return "Admin [aid=" + aid + ", aAccount=" + aAccount + ", aPassword=" + aPassword + ", aName=" + aName
+				+ ", status=" + status + ", aRank=" + aRank + ", aQuestion=" + aQuestion + ", aAnswer=" + aAnswer + "]";
 	}
 
 }

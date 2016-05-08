@@ -3,7 +3,6 @@ package com.vanroid.gduf.service.jwc;
 import javax.servlet.http.HttpSession;
 
 import com.vanroid.gduf.entity.Course;
-import com.vanroid.gduf.service.impl.jwc.JWCHandler;
 
 /**
  * 

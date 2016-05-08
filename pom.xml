@@ -12,7 +12,7 @@
 		<org.springframework-version>4.1.6.RELEASE</org.springframework-version>
 		<junit-version>4.10</junit-version>
 		<struts2-version>2.3.1</struts2-version>
-		<hiberante-version>3.6.10.Final</hiberante-version>
+		<hiberante-version>3.6.5.Final</hiberante-version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -56,6 +56,12 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
+			<version>${hiberante-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hiberante-version}</version>
 		</dependency>
 
@@ -165,6 +171,7 @@
 			<artifactId>jsp-api</artifactId>
 			<version>2.2</version>
 			<type>jar</type>
+			<scope>provided</scope>
 		</dependency>
 		<!-- 添加Servlet -->
 		<dependency>
@@ -188,7 +195,7 @@
 
 
 	<build>
-		<finalName>GDUFAssistant</finalName>
+		<finalName>GdufAssistantServer</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -205,10 +212,10 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.1</version>
 				<configuration>
-					<port>8080</port>
-					<path>/GDUFAssistant</path>
+					<port>8090</port>
+					<path>/GdufAssistantServer</path>
 					<uriEncoding>UTF-8</uriEncoding>
-					<finalName>GDUFAssistantServer</finalName>
+					<finalName>GdufAssistantServer</finalName>
 					<server>tomcat7</server>
 				</configuration>
 			</plugin>

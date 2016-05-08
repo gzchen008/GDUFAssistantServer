@@ -1,6 +1,5 @@
 package com.vanroid.gduf.controller.user;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,9 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -43,6 +40,10 @@ import com.vanroid.gduf.util.HttpClientUtils;
 @Controller("BindUserAction")
 @Scope("prototype")
 public class BindUserAction extends ActionSupport implements ServletRequestAware, ModelDriven<User> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Resource
 	private MyLibraryService myLibraryService;
 	@Resource(name = "loginService")

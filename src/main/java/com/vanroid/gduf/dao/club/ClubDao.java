@@ -2,51 +2,45 @@ package com.vanroid.gduf.dao.club;
 
 import java.util.List;
 
+import com.vanroid.gduf.common.page.Page;
+import com.vanroid.gduf.entity.Admin;
 import com.vanroid.gduf.entity.Club;
+import com.vanroid.gduf.entity.Message;
 
 public interface ClubDao {
-	/**
-	 * 保存社团信息到数据库
-	 * 
-	 * @param club
-	 */
-	public void saveClub(Club club);
+	public Club getClub(int cid);
+
+	public int updateClub(Club club);
+
+	public int deleteClub(int cid);
+
+	public int addClub(Club club);
 
 	/**
-	 * 根据名称返回社团信息
+	 * 分页取得Club List
 	 * 
-	 * @param clubName
-	 * @return List<CLub>
-	 */
-	public List<Club> getClubByName(Club clubName);
-
-	/**
-	 * 根据Id查询社团信息
-	 * 
-	 * @param clubId
-	 * @return Club
-	 */
-	public Club getClubById(Integer clubId);
-
-	/**
-	 * 得到所有的社团
-	 * 
-	 * @return Club
-	 */
-	public List<Club> getAllCLubs();
-
-	/**
-	 * 根据管理员Id查找对应的社团
-	 * 
-	 * @param id
+	 * @param page
 	 * @return
 	 */
-	public Club findClueByAdminId(Integer id);
+	public List<Club> getList(Page page);
 
-	/**
-	 * 更新社团
-	 * 
-	 * @param existClub
-	 */
-	public void updateClub(Club existClub);
+	public Admin getAdminForClub(int cid);
+
+	public int countClub();
+
+	public void save(Message message);
+
+	public List<Club> getAllClub();
+
+	public void saveClub(Club club);
+
+	public int countMsg(String flag);
+
+	public List<Message> getMsgList(Page page, String flag);
+
+	public Message getMessageById(int mid);
+
+	public void deleteMsg(int i);
+
+	public List<Message> getMsgByCId(int parseInt);
 }

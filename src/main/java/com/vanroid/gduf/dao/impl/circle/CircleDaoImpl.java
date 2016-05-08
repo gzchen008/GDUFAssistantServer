@@ -30,7 +30,6 @@ import com.vanroid.gduf.entity.User;
  * @version 1.0
  */
 @Component("circleDao")
-
 public class CircleDaoImpl implements CircleDao {
 	private HibernateTemplate hibernateTemplate;
 	private SessionFactory sessionFactoy;
@@ -53,8 +52,9 @@ public class CircleDaoImpl implements CircleDao {
 	@Transactional
 	public Circle deleteCircle(int tid) {
 		// TODO 自动生成的方法存根
-		///Circle circle=queryById(tid);
-		Circle circle=new Circle();circle.setTid(tid);
+		// /Circle circle=queryById(tid);
+		Circle circle = new Circle();
+		circle.setTid(tid);
 		hibernateTemplate.delete(circle);
 		return circle;
 	}
@@ -73,16 +73,18 @@ public class CircleDaoImpl implements CircleDao {
 		List<Circle> list = query.list();
 		return list;
 	}
+
 	@Override
 	/**
 	 * 根据id返回实体
 	 */
 	@Transactional
 	public Circle queryById(int id) {
-		Circle circle=hibernateTemplate.get(Circle.class, id);
+		Circle circle = hibernateTemplate.get(Circle.class, id);
 		// TODO 自动生成的方法存根
 		return circle;
 	}
+
 	public HibernateTemplate getHibernateTemplate() {
 		return hibernateTemplate;
 	}
@@ -114,16 +116,15 @@ public class CircleDaoImpl implements CircleDao {
 	@Transactional
 	public List<CircleMes> findMyNotifaction(int myId) {
 		// TODO 自动生成的方法存根
-		List<CircleMes> list=new ArrayList<CircleMes>();
-		Session session=this.sessionFactoy.getCurrentSession();
-		String hql="from CircleMes where receiver=? order by mid desc";
-		User u=new User();u.setId(myId);
-		Query query=session.createQuery(hql).setEntity(0, u);
-		list=query.list();
+		List<CircleMes> list = new ArrayList<CircleMes>();
+		Session session = this.sessionFactoy.getCurrentSession();
+		String hql = "from CircleMes where receiver=? order by mid desc";
+		User u = new User();
+		u.setId(myId);
+		Query query = session.createQuery(hql).setEntity(0, u);
+		list = query.list();
 		return list;
-		
-	}
 
-	
+	}
 
 }

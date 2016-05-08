@@ -20,7 +20,7 @@
 	 * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
 	 */
 	var URL = window.UEDITOR_HOME_URL || getUEBasePath();
-
+	console.info("baseURL:" + URL);
 	/**
 	 * 配置项主体。注意，此处所有涉及到路径的配置别遗漏URL变量。
 	 */
@@ -30,7 +30,8 @@
 		UEDITOR_HOME_URL : URL
 
 		// 服务器统一请求接口路径
-		, serverUrl: URL + "jsp/controller.jsp"
+		,
+		serverUrl : URL + "/jsp/controller.jsp"
 
 		// 工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
 		,
@@ -57,218 +58,223 @@
 				'mergedown', 'splittocells', 'splittorows', 'splittocols',
 				'charts', '|', 'print', 'preview', 'searchreplace', 'help',
 				'drafts' ] ]
-	// 当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
-	// ,labelMap:{
-	// 'anchor':'', 'undo':''
-	// }
+		// 当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
+		// ,labelMap:{
+		// 'anchor':'', 'undo':''
+		// }
 
-	// 语言配置项,默认是zh-cn。有需要的话也可以使用如下这样的方式来自动多语言切换，当然，前提条件是lang文件夹下存在对应的语言文件：
-	// lang值也可以通过自动获取 (navigator.language||navigator.browserLanguage
-	// ||navigator.userLanguage).toLowerCase()
-	// ,lang:"zh-cn"
-	// ,langPath:URL +"lang/"
+		// 语言配置项,默认是zh-cn。有需要的话也可以使用如下这样的方式来自动多语言切换，当然，前提条件是lang文件夹下存在对应的语言文件：
+		// lang值也可以通过自动获取 (navigator.language||navigator.browserLanguage
+		// ||navigator.userLanguage).toLowerCase()
+		// ,lang:"zh-cn"
+		// ,langPath:URL +"lang/"
 
-	// 主题配置项,默认是default。有需要的话也可以使用如下这样的方式来自动多主题切换，当然，前提条件是themes文件夹下存在对应的主题文件：
-	// 现有如下皮肤:default
-	// ,theme:'default'
-	// ,themePath:URL +"themes/"
+		// 主题配置项,默认是default。有需要的话也可以使用如下这样的方式来自动多主题切换，当然，前提条件是themes文件夹下存在对应的主题文件：
+		// 现有如下皮肤:default
+		// ,theme:'default'
+		// ,themePath:URL +"themes/"
 
-	// ,zIndex : 900 //编辑器层级的基数,默认是900
+		// ,zIndex : 900 //编辑器层级的基数,默认是900
 
-	// 针对getAllHtml方法，会在对应的head标签中增加该编码设置。
-	// ,charset:"utf-8"
+		// 针对getAllHtml方法，会在对应的head标签中增加该编码设置。
+		// ,charset:"utf-8"
 
-	// 若实例化编辑器的页面手动修改的domain，此处需要设置为true
-	// ,customDomain:false
+		// 若实例化编辑器的页面手动修改的domain，此处需要设置为true
+		// ,customDomain:false
 
-	// 常用配置项目
-	// ,isShow : true //默认显示编辑器
+		// 常用配置项目
+		// ,isShow : true //默认显示编辑器
 
-	// ,textarea:'editorValue' //
-	// 提交表单时，服务器获取编辑器提交内容的所用的参数，多实例时可以给容器name属性，会将name给定的值最为每个实例的键值，不用每次实例化的时候都设置这个值
+		// ,textarea:'editorValue' //
+		// 提交表单时，服务器获取编辑器提交内容的所用的参数，多实例时可以给容器name属性，会将name给定的值最为每个实例的键值，不用每次实例化的时候都设置这个值
 
-	// ,initialContent:'欢迎使用ueditor!' //初始化编辑器的内容,也可以通过textarea/script给值，看官网例子
+		// ,initialContent:'欢迎使用ueditor!'
+		// //初始化编辑器的内容,也可以通过textarea/script给值，看官网例子
 
-	// ,autoClearinitialContent:true
-	// //是否自动清除编辑器初始内容，注意：如果focus属性设置为true,这个也为真，那么编辑器一上来就会触发导致初始化的内容看不到了
+		// ,autoClearinitialContent:true
+		// //是否自动清除编辑器初始内容，注意：如果focus属性设置为true,这个也为真，那么编辑器一上来就会触发导致初始化的内容看不到了
 
-	// ,focus:false //初始化时，是否让编辑器获得焦点true或false
+		// ,focus:false //初始化时，是否让编辑器获得焦点true或false
 
-	// 如果自定义，最好给p标签如下的行高，要不输入中文时，会有跳动感
-	// ,initialStyle:'p{line-height:1em}'//编辑器层级的基数,可以用来改变字体等
+		// 如果自定义，最好给p标签如下的行高，要不输入中文时，会有跳动感
+		// ,initialStyle:'p{line-height:1em}'//编辑器层级的基数,可以用来改变字体等
 
-	// ,iframeCssUrl: URL + '/themes/iframe.css' //给编辑器内部引入一个css文件
+		// ,iframeCssUrl: URL + '/themes/iframe.css' //给编辑器内部引入一个css文件
 
-	// indentValue
-	// 首行缩进距离,默认是2em
-	// ,indentValue:'2em'
+		// indentValue
+		// 首行缩进距离,默认是2em
+		// ,indentValue:'2em'
 
-	// ,initialFrameWidth:1000 //初始化编辑器宽度,默认1000
-	// ,initialFrameHeight:320 //初始化编辑器高度,默认320
+		// ,initialFrameWidth:1000 //初始化编辑器宽度,默认1000
+		// ,initialFrameHeight:320 //初始化编辑器高度,默认320
 
-	// ,readonly : false //编辑器初始化结束后,编辑区域是否是只读的，默认是false
+		// ,readonly : false //编辑器初始化结束后,编辑区域是否是只读的，默认是false
 
-	// ,autoClearEmptyNode : true //getContent时，是否删除空的inlineElement节点（包括嵌套的情况）
+		// ,autoClearEmptyNode : true
+		// //getContent时，是否删除空的inlineElement节点（包括嵌套的情况）
 
-	// 启用自动保存
-	// ,enableAutoSave: true
-	// 自动保存间隔时间， 单位ms
-	// ,saveInterval: 500
+		// 启用自动保存
+		// ,enableAutoSave: true
+		// 自动保存间隔时间， 单位ms
+		// ,saveInterval: 500
 
-	// ,fullscreen : false //是否开启初始化时即全屏，默认关闭
+		// ,fullscreen : false //是否开启初始化时即全屏，默认关闭
 
-	// ,imagePopup:true //图片操作的浮层开关，默认打开
+		// ,imagePopup:true //图片操作的浮层开关，默认打开
 
-	// ,autoSyncData:true //自动同步编辑器要提交的数据
-	// ,emotionLocalization:false
-	// //是否开启表情本地化，默认关闭。若要开启请确保emotion文件夹下包含官网提供的images表情文件夹
+		// ,autoSyncData:true //自动同步编辑器要提交的数据
+		// ,emotionLocalization:false
+		// //是否开启表情本地化，默认关闭。若要开启请确保emotion文件夹下包含官网提供的images表情文件夹
 
-	// 粘贴只保留标签，去除标签所有属性
-	// ,retainOnlyLabelPasted: false
+		// 粘贴只保留标签，去除标签所有属性
+		// ,retainOnlyLabelPasted: false
 
-	// ,pasteplain:false //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
-	// 纯文本粘贴模式下的过滤规则
-	// 'filterTxtRules' : function(){
-	// function transP(node){
-	// node.tagName = 'p';
-	// node.setStyle();
-	// }
-	// return {
-	// //直接删除及其字节点内容
-	// '-' : 'script style object iframe embed input select',
-	// 'p': {$:{}},
-	// 'br':{$:{}},
-	// 'div':{'$':{}},
-	// 'li':{'$':{}},
-	// 'caption':transP,
-	// 'th':transP,
-	// 'tr':transP,
-	// 'h1':transP,'h2':transP,'h3':transP,'h4':transP,'h5':transP,'h6':transP,
-	// 'td':function(node){
-	// //没有内容的td直接删掉
-	// var txt = !!node.innerText();
-	// if(txt){
-	// node.parentNode.insertAfter(UE.uNode.createText(' &nbsp; &nbsp;'),node);
-	// }
-	// node.parentNode.removeChild(node,node.innerText())
-	// }
-	// }
-	// }()
+		// ,pasteplain:false //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
+		// 纯文本粘贴模式下的过滤规则
+		// 'filterTxtRules' : function(){
+		// function transP(node){
+		// node.tagName = 'p';
+		// node.setStyle();
+		// }
+		// return {
+		// //直接删除及其字节点内容
+		// '-' : 'script style object iframe embed input select',
+		// 'p': {$:{}},
+		// 'br':{$:{}},
+		// 'div':{'$':{}},
+		// 'li':{'$':{}},
+		// 'caption':transP,
+		// 'th':transP,
+		// 'tr':transP,
+		// 'h1':transP,'h2':transP,'h3':transP,'h4':transP,'h5':transP,'h6':transP,
+		// 'td':function(node){
+		// //没有内容的td直接删掉
+		// var txt = !!node.innerText();
+		// if(txt){
+		// node.parentNode.insertAfter(UE.uNode.createText(' &nbsp;
+		// &nbsp;'),node);
+		// }
+		// node.parentNode.removeChild(node,node.innerText())
+		// }
+		// }
+		// }()
 
-	// ,allHtmlEnabled:false //提交到后台的数据是否包含整个html字符串
+		// ,allHtmlEnabled:false //提交到后台的数据是否包含整个html字符串
 
-	// insertorderedlist
-	// 有序列表的下拉配置,值留空时支持多语言自动识别，若配置值，则以此值为准
-	// ,'insertorderedlist':{
-	// //自定的样式
-	// 'num':'1,2,3...',
-	// 'num1':'1),2),3)...',
-	// 'num2':'(1),(2),(3)...',
-	// 'cn':'一,二,三....',
-	// 'cn1':'一),二),三)....',
-	// 'cn2':'(一),(二),(三)....',
-	// //系统自带
-	// 'decimal' : '' , //'1,2,3...'
-	// 'lower-alpha' : '' , // 'a,b,c...'
-	// 'lower-roman' : '' , //'i,ii,iii...'
-	// 'upper-alpha' : '' , lang //'A,B,C'
-	// 'upper-roman' : '' //'I,II,III...'
-	// }
+		// insertorderedlist
+		// 有序列表的下拉配置,值留空时支持多语言自动识别，若配置值，则以此值为准
+		// ,'insertorderedlist':{
+		// //自定的样式
+		// 'num':'1,2,3...',
+		// 'num1':'1),2),3)...',
+		// 'num2':'(1),(2),(3)...',
+		// 'cn':'一,二,三....',
+		// 'cn1':'一),二),三)....',
+		// 'cn2':'(一),(二),(三)....',
+		// //系统自带
+		// 'decimal' : '' , //'1,2,3...'
+		// 'lower-alpha' : '' , // 'a,b,c...'
+		// 'lower-roman' : '' , //'i,ii,iii...'
+		// 'upper-alpha' : '' , lang //'A,B,C'
+		// 'upper-roman' : '' //'I,II,III...'
+		// }
 
-	// insertunorderedlist
-	// 无序列表的下拉配置，值留空时支持多语言自动识别，若配置值，则以此值为准
-	// ,insertunorderedlist : { //自定的样式
-	// 'dash' :'— 破折号', //-破折号
-	// 'dot':' 。 小圆圈', //系统自带
-	// 'circle' : '', // '○ 小圆圈'
-	// 'disc' : '', // '● 小圆点'
-	// 'square' : '' //'■ 小方块'
-	// }
-	// ,listDefaultPaddingLeft : '30'//默认的左边缩进的基数倍
-	// ,listiconpath : 'http://bs.baidu.com/listicon/'//自定义标号的路径
-	// ,maxListLevel : 3 //限制可以tab的级数, 设置-1为不限制
+		// insertunorderedlist
+		// 无序列表的下拉配置，值留空时支持多语言自动识别，若配置值，则以此值为准
+		// ,insertunorderedlist : { //自定的样式
+		// 'dash' :'— 破折号', //-破折号
+		// 'dot':' 。 小圆圈', //系统自带
+		// 'circle' : '', // '○ 小圆圈'
+		// 'disc' : '', // '● 小圆点'
+		// 'square' : '' //'■ 小方块'
+		// }
+		// ,listDefaultPaddingLeft : '30'//默认的左边缩进的基数倍
+		// ,listiconpath : 'http://bs.baidu.com/listicon/'//自定义标号的路径
+		// ,maxListLevel : 3 //限制可以tab的级数, 设置-1为不限制
 
-	// ,autoTransWordToList:false //禁止word中粘贴进来的列表自动变成列表标签
+		// ,autoTransWordToList:false //禁止word中粘贴进来的列表自动变成列表标签
 
-	// fontfamily
-	// 字体设置 label留空支持多语言自动切换，若配置，则以配置值为准
-	// ,'fontfamily':[
-	// { label:'',name:'songti',val:'宋体,SimSun'},
-	// { label:'',name:'kaiti',val:'楷体,楷体_GB2312, SimKai'},
-	// { label:'',name:'yahei',val:'微软雅黑,Microsoft YaHei'},
-	// { label:'',name:'heiti',val:'黑体, SimHei'},
-	// { label:'',name:'lishu',val:'隶书, SimLi'},
-	// { label:'',name:'andaleMono',val:'andale mono'},
-	// { label:'',name:'arial',val:'arial, helvetica,sans-serif'},
-	// { label:'',name:'arialBlack',val:'arial black,avant garde'},
-	// { label:'',name:'comicSansMs',val:'comic sans ms'},
-	// { label:'',name:'impact',val:'impact,chicago'},
-	// { label:'',name:'timesNewRoman',val:'times new roman'}
-	// ]
+		// fontfamily
+		// 字体设置 label留空支持多语言自动切换，若配置，则以配置值为准
+		// ,'fontfamily':[
+		// { label:'',name:'songti',val:'宋体,SimSun'},
+		// { label:'',name:'kaiti',val:'楷体,楷体_GB2312, SimKai'},
+		// { label:'',name:'yahei',val:'微软雅黑,Microsoft YaHei'},
+		// { label:'',name:'heiti',val:'黑体, SimHei'},
+		// { label:'',name:'lishu',val:'隶书, SimLi'},
+		// { label:'',name:'andaleMono',val:'andale mono'},
+		// { label:'',name:'arial',val:'arial, helvetica,sans-serif'},
+		// { label:'',name:'arialBlack',val:'arial black,avant garde'},
+		// { label:'',name:'comicSansMs',val:'comic sans ms'},
+		// { label:'',name:'impact',val:'impact,chicago'},
+		// { label:'',name:'timesNewRoman',val:'times new roman'}
+		// ]
 
-	// fontsize
-	// 字号
-	// ,'fontsize':[10, 11, 12, 14, 16, 18, 20, 24, 36]
+		// fontsize
+		// 字号
+		// ,'fontsize':[10, 11, 12, 14, 16, 18, 20, 24, 36]
 
-	// paragraph
-	// 段落格式 值留空时支持多语言自动识别，若配置，则以配置值为准
-	// ,'paragraph':{'p':'', 'h1':'', 'h2':'', 'h3':'', 'h4':'', 'h5':'',
-	// 'h6':''}
+		// paragraph
+		// 段落格式 值留空时支持多语言自动识别，若配置，则以配置值为准
+		// ,'paragraph':{'p':'', 'h1':'', 'h2':'', 'h3':'', 'h4':'', 'h5':'',
+		// 'h6':''}
 
-	// rowspacingtop
-	// 段间距 值和显示的名字相同
-	// ,'rowspacingtop':['5', '10', '15', '20', '25']
+		// rowspacingtop
+		// 段间距 值和显示的名字相同
+		// ,'rowspacingtop':['5', '10', '15', '20', '25']
 
-	// rowspacingBottom
-	// 段间距 值和显示的名字相同
-	// ,'rowspacingbottom':['5', '10', '15', '20', '25']
+		// rowspacingBottom
+		// 段间距 值和显示的名字相同
+		// ,'rowspacingbottom':['5', '10', '15', '20', '25']
 
-	// lineheight
-	// 行内间距 值和显示的名字相同
-	// ,'lineheight':['1', '1.5','1.75','2', '3', '4', '5']
+		// lineheight
+		// 行内间距 值和显示的名字相同
+		// ,'lineheight':['1', '1.5','1.75','2', '3', '4', '5']
 
-	// customstyle
-	// 自定义样式，不支持国际化，此处配置值即可最后显示值
-	// block的元素是依据设置段落的逻辑设置的，inline的元素依据BIU的逻辑设置
-	// 尽量使用一些常用的标签
-	// 参数说明
-	// tag 使用的标签名字
-	// label 显示的名字也是用来标识不同类型的标识符，注意这个值每个要不同，
-	// style 添加的样式
-	// 每一个对象就是一个自定义的样式
-	// ,'customstyle':[
-	// {tag:'h1', name:'tc', label:'', style:'border-bottom:#ccc 2px
-	// solid;padding:0 4px 0 0;text-align:center;margin:0 0 20px 0;'},
-	// {tag:'h1', name:'tl',label:'', style:'border-bottom:#ccc 2px
-	// solid;padding:0 4px 0 0;margin:0 0 10px 0;'},
-	// {tag:'span',name:'im', label:'',
-	// style:'font-style:italic;font-weight:bold'},
-	// {tag:'span',name:'hi', label:'',
-	// style:'font-style:italic;font-weight:bold;color:rgb(51, 153, 204)'}
-	// ]
+		// customstyle
+		// 自定义样式，不支持国际化，此处配置值即可最后显示值
+		// block的元素是依据设置段落的逻辑设置的，inline的元素依据BIU的逻辑设置
+		// 尽量使用一些常用的标签
+		// 参数说明
+		// tag 使用的标签名字
+		// label 显示的名字也是用来标识不同类型的标识符，注意这个值每个要不同，
+		// style 添加的样式
+		// 每一个对象就是一个自定义的样式
+		// ,'customstyle':[
+		// {tag:'h1', name:'tc', label:'', style:'border-bottom:#ccc 2px
+		// solid;padding:0 4px 0 0;text-align:center;margin:0 0 20px 0;'},
+		// {tag:'h1', name:'tl',label:'', style:'border-bottom:#ccc 2px
+		// solid;padding:0 4px 0 0;margin:0 0 10px 0;'},
+		// {tag:'span',name:'im', label:'',
+		// style:'font-style:italic;font-weight:bold'},
+		// {tag:'span',name:'hi', label:'',
+		// style:'font-style:italic;font-weight:bold;color:rgb(51, 153, 204)'}
+		// ]
 
-	// 打开右键菜单功能
-	// ,enableContextMenu: true
-	// 右键菜单的内容，可以参考plugins/contextmenu.js里边的默认菜单的例子，label留空支持国际化，否则以此配置为准
-	// ,contextMenu:[
-	// {
-	// label:'', //显示的名称
-	// cmdName:'selectall',//执行的command命令，当点击这个右键菜单时
-	// //exec可选，有了exec就会在点击时执行这个function，优先级高于cmdName
-	// exec:function () {
-	// //this是当前编辑器的实例
-	// //this.ui._dialogs['inserttableDialog'].open();
-	// }
-	// }
-	// ]
+		// 打开右键菜单功能
+		// ,enableContextMenu: true
+		// 右键菜单的内容，可以参考plugins/contextmenu.js里边的默认菜单的例子，label留空支持国际化，否则以此配置为准
+		// ,contextMenu:[
+		// {
+		// label:'', //显示的名称
+		// cmdName:'selectall',//执行的command命令，当点击这个右键菜单时
+		// //exec可选，有了exec就会在点击时执行这个function，优先级高于cmdName
+		// exec:function () {
+		// //this是当前编辑器的实例
+		// //this.ui._dialogs['inserttableDialog'].open();
+		// }
+		// }
+		// ]
 
-	// 快捷菜单
-	// ,shortcutMenu:["fontfamily", "fontsize", "bold", "italic", "underline",
-	// "forecolor", "backcolor", "insertorderedlist", "insertunorderedlist"]
+		// 快捷菜单
+		// ,shortcutMenu:["fontfamily", "fontsize", "bold", "italic",
+		// "underline",
+		// "forecolor", "backcolor", "insertorderedlist", "insertunorderedlist"]
 
-	// elementPathEnabled
-	// 是否启用元素路径，默认是显示
-	// ,elementPathEnabled : true
+		// elementPathEnabled
+		// 是否启用元素路径，默认是显示
+		,
+		elementPathEnabled : false
 
 	// wordCount
 	// ,wordCount:true //是否开启字数统计

@@ -27,8 +27,6 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import com.vanroid.gduf.entity.User;
-
 /**
  * 
  * @ClassName HttpClientUtils.java Create on 2015-8-28

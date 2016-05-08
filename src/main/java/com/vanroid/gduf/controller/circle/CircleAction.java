@@ -6,21 +6,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.vanroid.gduf.entity.Circle;
-import com.vanroid.gduf.entity.CircleMes;
 import com.vanroid.gduf.entity.ImagePath;
 import com.vanroid.gduf.entity.User;
 import com.vanroid.gduf.service.circle.CircleService;
@@ -29,6 +23,10 @@ import com.vanroid.gduf.service.circle.UpImgUtil;
 @Controller("circleAction")
 @Scope("prototype")
 public class CircleAction extends ActionSupport implements ModelDriven<Circle> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private CircleService circleService;
 	Map<String, Object> resultMap = new HashMap<String, Object>();
 	private int myId;

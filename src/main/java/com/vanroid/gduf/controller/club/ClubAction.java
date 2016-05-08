@@ -1,170 +1,147 @@
 package com.vanroid.gduf.controller.club;
 
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
+import javax.annotation.Resource;
+import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
-import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
-import com.vanroid.gduf.constant.ClubConstant;
-import com.vanroid.gduf.constant.URLConstant;
+import com.vanroid.gduf.common.page.Page;
+import com.vanroid.gduf.common.page.PageUtils;
 import com.vanroid.gduf.entity.Admin;
 import com.vanroid.gduf.entity.Club;
+import com.vanroid.gduf.service.club.AdminService;
 import com.vanroid.gduf.service.club.ClubService;
-import com.vanroid.gduf.util.SendMailUtil;
 
 @SuppressWarnings("serial")
-public class ClubAction extends ActionSupport {
-	// 社团服务接口
+@Controller("ClubAction")
+@Scope("prototype")
+public class ClubAction extends ActionSupport implements ServletRequestAware {
+	@Resource
 	private ClubService clubService;
-	// 社团列表
-	private List<Club> list = new ArrayList<Club>();
-	private InputStream inputStream;
+	@Resource
+	private AdminService adminService;
+	private List<Club> clubs;
+	private int curPage;
+	private int pageSize;
+	private Page pager;
+	private HttpServletRequest request;
 
-	public InputStream getInputStream() {
-		return inputStream;
-	}
+	public String managerPage() {
 
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
-	}
-
-	private Club club = new Club();
-	private Admin admin = new Admin();
-
-	/**
-	 * 返回社团管理员注册页
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String registerPage() throws Exception {
-		return "registerPage";
-	}
-
-	/**
-	 * 取得所有的社团
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String getAllClubs() throws Exception {
-		list = clubService.getAllClubs();
-		return Action.SUCCESS;
-	}
-
-	/**
-	 * 注册
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-
-	public String regist() throws Exception {
 		HttpServletRequest request = ServletActionContext.getRequest();
-		// 取得验证码
-		String validateCode = request.getParameter("validateCode");
-		HttpSession session = request.getSession();
-		String autoCode = (String) session.getAttribute("autoCode");
-		if (validateCode.equalsIgnoreCase(autoCode)) {
-			/**
-			 * 将用户信息保存到数据库和发送激活邮件到用户的邮箱中,等待用户激活账户
-			 */
-			// 设置激活码
-			String verifycode = UUID.randomUUID().toString();
-			session.setAttribute("verifycode", verifycode);
-			// 取得域名
-			// String serverName = request.getServerName();
-			// 取得端口号
-			int port = request.getServerPort();
-			// 访问的URL
+		System.out.println("curPage:" + curPage);
+		int totalRecord = clubService.countClub();
+		Page page = PageUtils.createPage(totalRecord, pageSize, curPage);
+		clubs = clubService.getList(curPage, pageSize, totalRecord);
+		System.out.println(page);
+		request.setAttribute("clubs", clubs);
+		request.setAttribute("pager", page);
+		return SUCCESS;
+	}
 
-			String url = request.getScheme() + "://" + URLConstant.HOST + ":"
-					+ port + request.getContextPath()
-					+ "/club_activate.action?verifycode=" + verifycode
-					+ "&eamil=" + admin.getAdmin_name();
-			// 实例化发送邮件工具类
-
-			// 添加消息
-			StringBuffer content = new StringBuffer();
-			content.append("<h1>广金校园通管理员:</h1>");
-			content.append("<p>请点击下面连接进行帐号的激活</p>");
-			content.append("<a href='" + url + "'>" + url + "</a>");
-			// 取得收件人邮箱
-			String email = admin.getAdmin_name();
-			// 发送邮件
-			SendMailUtil.send(email, content.toString());
-			// 将用户注册信息保存到数据库并返回管理员实例
-			clubService.saveRegiestInfo(admin, club, verifycode);
-			addActionMessage("注册成功，请前往邮箱中激活用户");
-			return "show";
-		} else {
-			request.setAttribute("errror", "验证码不正确");
-			return "registerPage";
+	public String updateClub() {
+		String result = "";
+		try {
+			String cid = request.getParameter("cid");
+			int clubId = Integer.parseInt(cid);
+			if (request.getMethod().equals("GET")) {
+				Club club = clubService.getClubById(clubId);
+				List<Admin> admins = adminService.getAllAdmin();
+				request.setAttribute("club", club);
+				request.setAttribute("admins", admins);
+				result = INPUT;
+			} else if (request.getMethod().equals("POST")) {
+				String aid = request.getParameter("adminName");
+				String cName = request.getParameter("cName");
+				String cdescribe = request.getParameter("cdescribe");
+				int adminId = Integer.parseInt(aid);
+				Admin admin = adminService.getAdminById(adminId);
+				Club club = new Club(clubId, cName, cdescribe, admin);
+				clubService.update(club);
+				result = SUCCESS;
+			}
+		} catch (Exception e) {
+			return INPUT;
 		}
+		return result;
 	}
 
-	/**
-	 * 激活用户操作
-	 * 
-	 * @return
-	 */
-	public String activate() {
-		String verifycode = ServletActionContext.getRequest().getParameter(
-				"verifycode");
-		String club_name = ServletActionContext.getRequest().getParameter(
-				"eamil");
-		System.out.println("request:验证码" + verifycode);
-		System.out.println("request:eamil" + club_name);
-		String info = clubService.activateClub(verifycode, club_name);
-		if (info.equals(ClubConstant.OPERATION_SUCCESS)) {
-			return "activate";
-		} else {
-			return ERROR;
+	public String addClub() {
+		String method = ServletActionContext.getRequest().getMethod();
+		String result = null;
+		if (method.equals("POST")) {
+			String adminId = request.getParameter("adminName");
+			System.out.println("adminId:" + adminId);
+			String cName = request.getParameter("cName");
+			String cdescribe = request.getParameter("cdescribe");
+			Admin admin = adminService.getAdminById(adminId != null ? Integer.parseInt(adminId) : 1);
+			clubService.saveClub(admin, cdescribe, cName);
+			result = LOGIN;
+		} else if (method.equals("GET")) {
+			System.out.println("GET请求");
+			List<Admin> admins = adminService.getAllAdmin();
+			request.setAttribute("admins", admins != null ? admins : "缺失");
+			result = SUCCESS;
 		}
+		return result;
 	}
 
-	/**
-	 * getter setter方法
-	 * 
-	 * @return
-	 */
-	public List<Club> getList() {
-		return list;
+	public String delClub() {
+		String[] cidArray = request.getParameter("list").split(",");
+
+		for (int i = 0; i < cidArray.length; i++) {
+			clubService.delClub(Integer.parseInt(cidArray[i]));
+		}
+
+		return SUCCESS;
 	}
 
-	public void setList(List<Club> list) {
-		this.list = list;
+	public void setCurPage(int curPage) {
+		this.curPage = curPage;
 	}
 
-	public Club getClub() {
-		return club;
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 
-	public void setClub(Club club) {
-		this.club = club;
+	public List<Club> getClubs() {
+		return clubs;
 	}
 
-	public Admin getAdmin() {
-		return admin;
+	public void setClubs(List<Club> clubs) {
+		this.clubs = clubs;
 	}
 
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
+	public ClubService getClubService() {
+		return clubService;
 	}
 
-	/**
-	 * 注入Service
-	 * 
-	 * @param clubService
-	 */
-	public void setClubService(ClubService clubService) {
-		this.clubService = clubService;
+	public int getCurPage() {
+		return curPage;
 	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public Page getPager() {
+		return pager;
+	}
+
+	public void setPager(Page pager) {
+		this.pager = pager;
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+	}
+
 }

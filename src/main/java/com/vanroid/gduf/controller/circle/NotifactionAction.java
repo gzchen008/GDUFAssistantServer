@@ -27,6 +27,10 @@ import com.vanroid.gduf.entity.User;
  */
 @Controller("notifactionAction")
 public class NotifactionAction extends ActionSupport {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private CircleDao circleDao;
 
 	public String execute() {

@@ -20,6 +20,6 @@ public interface GradeDao {
 	public void update(Grade g);
 
 	public Grade query();
-	
+
 	public Grade queryExistInDb(Grade g);
 }

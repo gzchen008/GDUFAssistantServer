@@ -1,28 +1,28 @@
 package com.vanroid.gduf.service.club;
 
+import java.util.List;
+
 import com.vanroid.gduf.entity.Admin;
 
 public interface AdminService {
 	/**
-	 * 校验管理员账号是否存在
+	 * 判断账号是否已经登陆
 	 * 
-	 * @param admin
-	 * @return Admin
-	 */
-	public Admin getAdmin(Admin admin);
-
-	/**
-	 * 根据管理员帐号名查找管理员是否存在
-	 * 
-	 * @param adminName
+	 * @param acount
+	 * @param apwd
 	 * @return
 	 */
-	public Admin findAdminByName(String adminName);
+	public boolean isLogin(String acount, String apwd);
 
 	/**
-	 * 更新用户
+	 * 根据账号获取admin信息
 	 * 
-	 * @param admin
+	 * @param account
+	 * @return
 	 */
-	public void updateAdmin(Admin existAdmin);
+	public Admin getAdminByAccount(String account);
+
+	public List<Admin> getAllAdmin();
+
+	public Admin getAdminById(int id);
 }
