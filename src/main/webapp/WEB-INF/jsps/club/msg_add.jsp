@@ -77,6 +77,13 @@
 										</div>
 									</div>
 									<div class="form-group row">
+										<label for="club_name" class="col-sm-2 control-label">消息标题</label>
+										<div class="col-sm-6">
+											<input type="url" class="form-control" name="icon"
+												placeholder="封面图片">
+										</div>
+									</div>
+									<div class="form-group row">
 										<label for="" class="col-sm-2 control-label">选择作者</label>
 										<div class="col-sm-5">
 											<select class="from-control input-sm" name="clubId"

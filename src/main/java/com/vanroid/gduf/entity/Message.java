@@ -22,6 +22,7 @@ public class Message {
 	@Id
 	@GeneratedValue
 	private int mid;
+	private String mIcon;
 	private String mTitle;
 	@Column(length = 16777216)
 	private String mContent;
@@ -77,6 +78,14 @@ public class Message {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public String getmIcon() {
+		return mIcon;
+	}
+
+	public void setmIcon(String mIcon) {
+		this.mIcon = mIcon;
 	}
 
 	@Override

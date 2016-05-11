@@ -50,7 +50,7 @@
 		<c:forEach items="${msgList }" var="msg">
 			<li><a
 				href="${pageContext.request.contextPath }/msg/clubMsgDetail.action?mid=${msg.mid}"><img
-					class="img76" src="${image }" alt="" width="76" height="76">${msg.mTitle }
+					class="img76" src="${msg.mIcon}" alt="" width="76" height="76">${msg.mTitle }
 					<div class="jiantou"></div> </a></li>
 		</c:forEach>
 	</ul>

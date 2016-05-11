@@ -38,6 +38,7 @@ public class MessageAction extends ActionSupport implements ServletRequestAware 
 			String mTitle = request.getParameter("mTitle");
 			String mContent = request.getParameter("content");
 			String type = request.getParameter("type");
+			String icon = request.getParameter("icon");
 			System.out.println("mContent:" + mContent);
 			Club club = clubService.getClubById(Integer.parseInt(clubId));
 			System.out.println(club);
@@ -46,6 +47,9 @@ public class MessageAction extends ActionSupport implements ServletRequestAware 
 			message.setmTitle(mTitle);
 			message.setmContent(mContent);
 			message.setType(Integer.parseInt(type));
+			String imageUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+					+ "/" + request.getContextPath() + "/images/club_icon.png";
+			message.setmIcon(icon == null ? imageUrl : icon);
 			clubService.saveMessage(message);
 			result = LOGIN;
 		}
@@ -55,7 +59,7 @@ public class MessageAction extends ActionSupport implements ServletRequestAware 
 	public String clubMsgList() {
 		String curPage = request.getParameter("curPage");
 		String type = request.getParameter("type");
-		String image = request.getContextPath() + "/images/club_icon.png";
+		// String image = request.getContextPath() + "/images/club_icon.png";
 		List<Message> messagelist = clubService.getMessageList(curPage == null ? 1 : Integer.parseInt(curPage), 10,
 				type);
 		System.out.println("<><><><><><><>");
@@ -66,7 +70,7 @@ public class MessageAction extends ActionSupport implements ServletRequestAware 
 		for (Message message : messagelist) {
 			System.out.println(messagelist);
 		}
-		request.setAttribute("image", image);
+		// request.setAttribute("image", image);
 		request.setAttribute("msgList", messagelist);
 		request.setAttribute("pager", page);
 		return SUCCESS;
