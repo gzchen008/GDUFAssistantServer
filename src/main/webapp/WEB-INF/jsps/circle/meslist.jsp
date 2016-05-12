@@ -25,12 +25,12 @@
 	</c:if>
 			<div class="imagetext">
 				<img class="other" src="../img/head/<%=new java.util.Random().nextInt(11)%>.png">
-				${notifaction.sender.stuId }&nbsp回复您： ${notifaction.mes}
+				${notifaction.sender.realName }&nbsp回复您： ${notifaction.mes}
 			<!-- 回复框  -->
 		<input id="ccont${notifaction.tid.tid}" type="text" class="form-control input"
 				placeholder="我要回复……" />
 			<button id="cid" class="btn btn-success "
-				onclick="addcom(${sessionScope.myId},${notifaction.tid.sender.stuId},${notifaction.tid.sender.id},${notifaction.tid.tid})">回复</button>
+				onclick="addcom(${sessionScope.myId},${notifaction.tid.sender.stuId},${notifaction.tid.sender.id},'${notifaction.tid.sender.realName }',${notifaction.tid.tid})">回复</button>
 			</div>
 		</div>
 		
@@ -43,7 +43,7 @@
 var j = jQuery;
 	/* 异步请求，添加评论 */
 	/* sid 发送者id，ssid发送者学号，rrid接收者的学号，rid接收者id，tid朋友圈序号 */
-	function addcom(sid, rrid, rid, tid) {
+	function addcom(sid, rrid, rid,rName, tid) {
 		j(document).ready(function() {
 					j.post("addCommentjson.action", {
 						"comment.sender.id" : sid,
@@ -54,7 +54,7 @@ var j = jQuery;
 						console.log("tid:"+tid);
 						console.log("cid:"+data.cid);
 						console.log("空：" + j(".div" + tid).val());
-						j("#ccont"+tid).prev().after("<p>我回复"+rrid+": "+j("#ccont" + tid).val()+"</p>");
+						j("#ccont"+tid).prev().after("<p>我回复"+rName+": "+j("#ccont" + tid).val()+"</p>");
 						
 					});
 				});
