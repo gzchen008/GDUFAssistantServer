@@ -93,7 +93,7 @@
 							<input onfocusout="disp(${comment.cid })"
 								id="ccont${comment.cid}" type="text" class="form-control input" />
 							<button class="btn btn-default "
-								onclick="replcom(${comment.cid},${sessionScope.myId},'${sessionScope.myRealName}',${comment.sender.stuId},${comment.sender.id},${circle.tid})">回复</button>
+								onclick="replcom(${comment.cid},${sessionScope.myId},'${comment.sender.realName}',${comment.sender.stuId},${comment.sender.id},${circle.tid})">回复</button>
 						</div>
 					</div>
 				</c:if>
@@ -346,7 +346,7 @@
 																+ ','
 																+ ${sessionScope.myId}
 																+ ','
-																+'\'${sessionScope.myRealName}\','
+																+'\''+comments[k].sender.realName+'\','
 																+ comments[k].sender.stuId
 																+ ','
 																+ comments[k].sender.id
